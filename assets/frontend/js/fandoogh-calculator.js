@@ -270,9 +270,13 @@
         contactDirect(meters) {
             const total = this.totalNode.textContent;
             const productName = this.product.options[this.product.selectedIndex].text;
-            let message = `سلام، من درخواست پیش‌فاکتور برای محصول ${productName} دارم.\n`;
-            message += `مقدار: ${meters} ${this.unitLabel}\n`;
-            message += `مبلغ کل: ${total}`;
+            
+            let message = config.messageTemplate || "سلام، من درخواست پیش‌فاکتور برای محصول {product} دارم.\nمقدار: {quantity} {unit}\nمبلغ کل: {total}";
+            message = message.replace(/{product}/g, productName)
+                             .replace(/{quantity}/g, meters)
+                             .replace(/{unit}/g, this.unitLabel)
+                             .replace(/{total}/g, total);
+                             
             const encodedMessage = encodeURIComponent(message);
             
             let url = '';

@@ -16,7 +16,7 @@ final class AdminPage
         <header class="fa-admin-welcome">
             <div>
                 <h1 tabindex="-1">ماشین حساب فندق</h1>
-                <p>تنظیمات جامع، قیمت‌های ثابت و شخصی‌سازی ماژول ماشین حساب.</p>
+                <p>تنظیمات جامع، قیمت‌های ثابت و شخصی‌سازی ماژول ماشین حساب. برای محصولات متغیر.</p>
             </div>
             <span class="fa-admin-build"><code>[fandoogh_calculator]</code></span>
         </header>
@@ -84,6 +84,11 @@ final class AdminPage
                             <strong>مقدار هدف (شماره / لینک / ID)</strong><br>
                             <input type="text" name="settings[cta_target]" value="<?php echo esc_attr($settings['cta_target']); ?>" placeholder="مثلاً 0912... یا https://t.me/id?text={message}" style="width: 100%; max-width: none;">
                             <p class="description">برای پیام‌رسان‌ها می‌توانید لینک کامل را قرار دهید و برای ارسال خودکار پیش‌فاکتور از <code>{message}</code> استفاده کنید.</p>
+                        </label>
+                        <label>
+                            <strong>قالب متن پیش‌فاکتور (برای شبکه‌های اجتماعی)</strong><br>
+                            <textarea name="settings[message_template]" rows="4" style="width: 100%; max-width: none;"><?php echo esc_textarea($settings['message_template'] ?? ''); ?></textarea>
+                            <p class="description">متغیرهای مجاز: <code>{product}</code> (نام محصول)، <code>{quantity}</code> (مقدار/متراژ)، <code>{unit}</code> (واحد)، <code>{total}</code> (مبلغ کل)</p>
                         </label>
                     </div>
                 </section>

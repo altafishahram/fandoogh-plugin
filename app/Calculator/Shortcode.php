@@ -136,6 +136,7 @@ final class Shortcode
                 'ctaTarget' => $settings['cta_target'],
                 'unitLabel' => $settings['label_unit'],
                 'labelMandatoryFees' => $settings['label_mandatory_fees'],
+                'messageTemplate' => $settings['message_template'],
             ]);
             self::$localized = true;
         }

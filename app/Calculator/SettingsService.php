@@ -35,6 +35,7 @@ final class SettingsService
             'label_mandatory_fees' => 'هزینه‌های لحاظ‌شده',
             'label_submit' => 'ثبت پیش‌فاکتور',
             'allowed_categories' => [], // Array of category IDs
+            'message_template' => "سلام، من درخواست پیش‌فاکتور برای محصول {product} دارم.\nمقدار: {quantity} {unit}\nمبلغ کل: {total}",
         ];
 
         $opacity = isset($settings['opacity']) ? (int) $settings['opacity'] : $defaults['opacity'];
@@ -62,6 +63,7 @@ final class SettingsService
             'label_mandatory_fees' => sanitize_text_field((string) ($settings['label_mandatory_fees'] ?? $defaults['label_mandatory_fees'])) ?: $defaults['label_mandatory_fees'],
             'label_submit' => sanitize_text_field((string) ($settings['label_submit'] ?? $defaults['label_submit'])) ?: $defaults['label_submit'],
             'allowed_categories' => $allowedCategories,
+            'message_template' => sanitize_textarea_field((string) ($settings['message_template'] ?? $defaults['message_template'])) ?: $defaults['message_template'],
         ];
     }
 }
