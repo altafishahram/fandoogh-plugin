@@ -1,0 +1,117 @@
+.fa-reviews{
+
+    margin-top:40px;
+
+}
+
+.fa-reviews-summary{
+
+    padding:20px;
+
+    border:1px solid #e5e5e5;
+
+    border-radius:10px;
+
+    margin-bottom:25px;
+
+    background:#fafafa;
+
+}
+
+.fa-review-average{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    margin:10px 0;
+
+}
+
+.fa-review-count{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.fa-review-form{
+
+    margin-bottom:40px;
+
+}
+
+.fa-review-form input,
+
+.fa-review-form textarea,
+
+.fa-review-form select{
+
+    width:100%;
+
+    margin-bottom:15px;
+
+    padding:10px;
+
+}
+
+.fa-review-form button{
+
+    padding:12px 30px;
+
+    cursor:pointer;
+
+}
+
+.fa-review-list{
+
+    margin-top:30px;
+
+}
+
+.fa-review-item{
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    border:1px solid #ececec;
+
+    border-radius:10px;
+
+}
+
+.fa-review-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+}
+
+.fa-review-content{
+
+    line-height:2;
+
+}
+
+.fa-review-notice{
+
+    margin-top:15px;
+
+}
+
+.fa-review-notice--success{
+
+    color:#1e8e3e;
+
+}
+
+.fa-review-notice--error{
+
+    color:#d93025;
+
+}

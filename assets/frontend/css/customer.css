@@ -1,0 +1,36 @@
+.fa-customer-card {
+    display: grid;
+    gap: 16px;
+}
+
+.fa-customer-thumbnail img,
+.fa-customer-image,
+.fa-customer-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.fa-customer-title {
+    margin: 0;
+}
+
+.fa-customer-address {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: #f6f7f7;
+}
+
+.fa-customer-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.fa-customer-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}

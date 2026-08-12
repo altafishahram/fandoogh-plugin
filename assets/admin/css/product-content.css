@@ -1,0 +1,42 @@
+.fa-product-content-box {
+    padding: 4px 2px;
+}
+
+.fa-product-faq-item {
+    margin: 0 0 16px;
+    padding: 16px;
+    border: 1px solid #dcdcde;
+    border-radius: 10px;
+    background: #fcfcfc;
+}
+
+.fa-product-faq-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.fa-product-faq-question {
+    flex: 1;
+}
+
+.fa-product-faq-answer-wrap textarea {
+    min-height: 180px;
+}
+
+.fa-product-content-shortcode {
+    margin: 14px 0 0;
+}
+
+.fa-product-content-shortcode code {
+    direction: ltr;
+    display: inline-block;
+}
+
+@media (max-width: 782px) {
+    .fa-product-faq-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

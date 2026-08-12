@@ -1,0 +1,180 @@
+.fa-card{
+    margin-top:20px;
+    margin-bottom:25px;
+    background:#fff;
+    border:1px solid #dcdcde;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.fa-card-header{
+    padding:18px 24px;
+    border-bottom:1px solid #f0f0f1;
+    background:#fafafa;
+}
+
+.fa-card-title{
+    margin:0;
+    font-size:16px;
+    font-weight:600;
+    color:#1d2327;
+}
+
+.fa-card-body{
+    padding:25px;
+}
+
+.fa-card .form-table{
+    margin:0;
+}
+
+.fa-card .form-table th{
+    width:220px;
+    padding:18px 10px 18px 0;
+    vertical-align:top;
+    font-weight:600;
+    color:#1d2327;
+}
+
+.fa-card .form-table td{
+    padding:15px 0;
+}
+
+.fa-card textarea.large-text{
+    min-height:120px;
+    border-radius:8px;
+}
+
+.fa-card input[type="text"],
+.fa-card input[type="url"],
+.fa-card textarea{
+    border-radius:8px;
+}
+
+.fa-card label{
+    display:block;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+.fa-card input[type="checkbox"]{
+    margin-left:8px;
+}
+
+#fa-upload-video,
+#fa-upload-gallery{
+    margin-left:8px !important;
+}
+
+#fa-remove-video,
+#fa-remove-gallery{
+    color:#b32d2e;
+    border-color:#b32d2e;
+}
+
+#fa-remove-video:hover,
+#fa-remove-gallery:hover{
+    background:#b32d2e;
+    color:#fff;
+}
+
+#fa-video-preview{
+    margin-top:20px;
+}
+
+#fa-video-preview video{
+    width:100%;
+    max-width:420px;
+    border-radius:12px;
+    background:#000;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+#fa-gallery-preview{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:20px;
+}
+
+.fa-gallery-item{
+    width:90px;
+    height:90px;
+    overflow:hidden;
+    border-radius:10px;
+    border:1px solid #dcdcde;
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.fa-gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+@media (max-width:782px){
+
+    .fa-card-body{
+        padding:20px;
+    }
+
+    .fa-card .form-table th,
+    .fa-card .form-table td{
+        display:block;
+        width:100%;
+        padding:10px 0;
+    }
+
+    #fa-video-preview video{
+        max-width:100%;
+    }
+
+    .fa-gallery-item{
+        width:80px;
+        height:80px;
+    }
+
+    #fa-upload-video,
+    #fa-upload-gallery,
+    #fa-remove-video,
+    #fa-remove-gallery{
+        margin-top:8px !important;
+    }
+
+}
+
+.fa-customer-shortcode-reference{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    margin-top:12px;
+    color:#50575e;
+}
+
+.fa-field-shortcode{
+    display:block;
+    width:max-content;
+    max-width:100%;
+    margin-top:8px;
+    direction:ltr;
+    font-size:11px;
+    font-weight:400;
+    user-select:all;
+}
+
+.fa-customer-shortcode-reference code{
+    direction:ltr;
+    user-select:all;
+}
+
+.fa-card .wp-editor-wrap{
+    max-width:100%;
+}
+
+.fa-card .wp-editor-container{
+    border-radius:8px;
+    overflow:hidden;
+}

@@ -1,0 +1,88 @@
+.fa-calculator-admin-panel > header {
+    align-items: flex-start;
+}
+
+.fa-calculator-admin-panel > header p {
+    margin: 5px 0 0;
+    color: var(--fa-muted, #64748b);
+}
+
+.fa-fixed-prices-list {
+    display: grid;
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.fa-fixed-price-row {
+    padding: 20px;
+    border: 1px solid var(--fa-glass-border, rgba(148, 163, 184, .28));
+    border-radius: calc(var(--fa-radius, 18px) - 5px);
+    background: color-mix(in srgb, var(--fa-surface, #fff) 72%, transparent);
+    box-shadow: 0 12px 34px rgba(15, 23, 42, .06);
+}
+
+.fa-fixed-price-row__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.fa-fixed-price-fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: end;
+}
+
+.fa-fixed-price-fields > label {
+    display: grid;
+    gap: 7px;
+}
+
+.fa-fixed-price-fields > label > span:first-child {
+    color: var(--fa-ink, #0f172a);
+    font-weight: 700;
+}
+
+.fa-fixed-price-fields input[type="text"],
+.fa-fixed-price-fields input[type="number"],
+.fa-fixed-price-fields select:not(.wc-product-search) {
+    width: 100%;
+    min-height: 42px;
+}
+
+.fa-fixed-price-products {
+    grid-column: span 2;
+}
+
+.fa-fixed-price-products .select2-container {
+    width: 100% !important;
+}
+
+.fa-fixed-price-status {
+    justify-items: start;
+}
+
+.fa-calculator-admin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+@media (max-width: 1100px) {
+    .fa-fixed-price-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .fa-fixed-price-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .fa-fixed-price-products {
+        grid-column: auto;
+    }
+}

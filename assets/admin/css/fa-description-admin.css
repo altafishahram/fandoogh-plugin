@@ -1,0 +1,71 @@
+/* ======================================================
+   Fandoogh Description Module
+   ====================================================== */
+
+.fa-description-wrap{
+
+    width:100%;
+
+}
+
+.fa-description-wrap .wp-editor-wrap{
+
+    width:100%;
+
+}
+
+.fa-description-wrap .wp-editor-container{
+
+    min-height:320px;
+
+}
+
+.fa-description-wrap iframe{
+
+    min-height:320px;
+
+}
+
+.fa-description-wrap textarea{
+
+    min-height:320px;
+
+}
+
+.fa-description-wrap .quicktags-toolbar{
+
+    border-bottom:1px solid #dcdcde;
+
+}
+
+.fa-description-wrap .mce-toolbar-grp{
+
+    border-bottom:1px solid #dcdcde;
+
+}
+
+.fa-description-wrap .description{
+
+    margin-top:18px;
+
+}
+
+tr.form-field .fa-description-wrap{
+
+    margin:0;
+
+}
+
+@media (max-width:782px){
+
+    .fa-description-wrap .wp-editor-container,
+
+    .fa-description-wrap iframe,
+
+    .fa-description-wrap textarea{
+
+        min-height:260px;
+
+    }
+
+}

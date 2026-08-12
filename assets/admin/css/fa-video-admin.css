@@ -1,0 +1,71 @@
+/* ======================================================
+   Fandoogh Video Module
+   ====================================================== */
+
+.fa-video-wrap label{
+
+    display:block;
+
+    margin-bottom:15px;
+
+}
+
+.fa-video-input{
+
+    width:100%;
+
+}
+
+.fa-video-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+.fa-video-upload{
+
+    min-width:130px;
+
+}
+
+.fa-video-preview video{
+
+    max-width:480px;
+
+}
+
+tr.form-field .fa-video-wrap{
+
+    margin:0;
+
+}
+
+@media (max-width:782px){
+
+    .fa-video-actions{
+
+        flex-direction:column;
+
+    }
+
+    .fa-video-upload,
+
+    .fa-video-remove{
+
+        width:100%;
+
+    }
+
+    .fa-video-preview video{
+
+        max-width:100%;
+
+    }
+
+}

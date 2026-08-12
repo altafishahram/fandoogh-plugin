@@ -1,0 +1,91 @@
+/* ======================================================
+   Fandoogh FAQ Module
+   ====================================================== */
+
+.fa-faq-item{
+
+    background:#fcfcfc;
+
+    border:1px solid #dcdcde;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    transition:.25s;
+
+}
+
+.fa-faq-item:hover{
+
+    border-color:#2271b1;
+
+    box-shadow:0 8px 18px rgba(34,113,177,.08);
+
+}
+
+.fa-faq-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:18px;
+
+}
+
+.fa-faq-question{
+
+    flex:1;
+
+}
+
+.fa-faq-answer-wrap{
+
+    width:100%;
+
+}
+
+.fa-faq-answer-wrap textarea{
+
+    min-height:260px;
+
+}
+
+.fa-faq-item hr{
+
+    margin:22px 0 0;
+
+    border:0;
+
+    border-top:1px solid #ececec;
+
+}
+
+#fa-add-faq{
+
+    min-width:140px;
+
+    margin-top:10px;
+
+}
+
+@media (max-width:782px){
+
+    .fa-faq-header{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .fa-remove-faq{
+
+        width:100%;
+
+    }
+
+}
