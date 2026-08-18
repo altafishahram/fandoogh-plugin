@@ -13,4 +13,11 @@ return [
     'reviews' => ['title' => __('نظرات', 'fandoogh'), 'description' => __('سیستم مدیریت نظرات محصولات.', 'fandoogh'), 'icon' => 'dashicons-star-filled', 'version' => '1.0.0'],
     'customers' => ['title' => __('مشتریان', 'fandoogh'), 'description' => __('مدیریت اطلاعات مشتریان.', 'fandoogh'), 'icon' => 'dashicons-groups', 'version' => '1.0.0'],
     'projects' => ['title' => __('پروژه‌ها', 'fandoogh'), 'description' => __('مدیریت پروژه‌های انجام‌شده.', 'fandoogh'), 'icon' => 'dashicons-portfolio', 'version' => '1.0.0'],
+    'order-center' => [
+        'title' => __('داشبورد مرکز سفارشات', 'fandoogh'),
+        'description' => __('مدیریت حرفه‌ای سفارش‌های ووکامرس، وضعیت سفارش، مشتری، محصولات، پرداخت، ارسال، آمار و اطلاعات تکمیلی سفارش.', 'fandoogh'),
+        'icon' => 'dashicons-cart',
+        'version' => '1.0.0',
+        'dependency' => 'woocommerce',
+    ],
 ];

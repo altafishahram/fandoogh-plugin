@@ -35,25 +35,16 @@ final class Assets
 
     public const ADMIN_THEME_MANAGER = 'fa-admin-theme-manager';
 
-    public const ADMIN_UI = 'fa-admin-ui';
-
-    public const FRONTEND = 'fa-frontend';
-
-    public const DESCRIPTION = 'fa-description';
-
-    public const VIDEO = 'fa-video';
-
-    public const GALLERY = 'fa-gallery';
-
-    public const FAQ = 'fa-faq';
-
     public const REVIEWS = 'fa-reviews';
-
-    public const ELEMENTOR = 'fa-elementor';
 
     public const CALCULATOR_ADMIN = 'fa-calculator-admin';
 
-    public const FANDOOGH_CALCULATOR = 'fa-fandoogh-calculator';
+    public const CALCULATOR = 'fa-calculator';
+
+    /** @deprecated Use CALCULATOR. Kept as an internal compatibility alias. */
+    public const FANDOOGH_CALCULATOR = self::CALCULATOR;
+
+    public const ORDER_CENTER_ADMIN = 'fa-order-center-admin';
 
     /*
     |--------------------------------------------------------------------------
@@ -71,25 +62,14 @@ final class Assets
 
     public const ADMIN_THEME_MANAGER_JS = 'assets/admin/js/theme-manager.js';
 
-    public const ADMIN_UI_CSS = 'assets/css/admin-ui.css';
-
-    public const FRONTEND_CSS = 'assets/css/frontend.css';
-
-    public const DESCRIPTION_CSS = 'assets/css/description.css';
-
-    public const VIDEO_CSS = 'assets/css/video.css';
-
-    public const GALLERY_CSS = 'assets/css/gallery.css';
-
-    public const FAQ_CSS = 'assets/css/fa-faq-admin.css';
-
-    public const REVIEWS_CSS = 'assets/css/reviews.css';
-
-    public const ELEMENTOR_CSS = 'assets/css/elementor.css';
-
     public const CALCULATOR_ADMIN_CSS = 'assets/admin/css/calculator.css';
 
-    public const FANDOOGH_CALCULATOR_CSS = 'assets/frontend/css/fandoogh-calculator.css';
+    public const CALCULATOR_CSS = 'assets/frontend/css/fandoogh-calculator.css';
+
+    /** @deprecated Use CALCULATOR_CSS. */
+    public const FANDOOGH_CALCULATOR_CSS = self::CALCULATOR_CSS;
+
+    public const ORDER_CENTER_ADMIN_CSS = 'assets/admin/css/order-center.css';
 
     /*
     |--------------------------------------------------------------------------
@@ -97,21 +77,12 @@ final class Assets
     |--------------------------------------------------------------------------
     */
 
-    public const DESCRIPTION_JS = 'assets/js/description.js';
-
-    public const VIDEO_JS = 'assets/js/video.js';
-
-    public const VIDEO_ADMIN_JS = 'assets/js/fa-video-admin.js';
-
-    public const GALLERY_JS = 'assets/js/gallery.js';
-
-    public const FAQ_JS = 'assets/js/fa-faq-admin.js';
-
-    public const REVIEWS_JS = 'assets/js/reviews.js';
-
-    public const ELEMENTOR_JS = 'assets/js/elementor.js';
-
     public const CALCULATOR_ADMIN_JS = 'assets/admin/js/calculator.js';
 
-    public const FANDOOGH_CALCULATOR_JS = 'assets/frontend/js/fandoogh-calculator.js';
+    public const CALCULATOR_JS = 'assets/frontend/js/fandoogh-calculator.js';
+
+    /** @deprecated Use CALCULATOR_JS. */
+    public const FANDOOGH_CALCULATOR_JS = self::CALCULATOR_JS;
+
+    public const ORDER_CENTER_ADMIN_JS = 'assets/admin/js/order-center.js';
 }

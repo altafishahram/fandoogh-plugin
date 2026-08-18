@@ -18,7 +18,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 define('FA_VERSION', '1.0.0');
-define('FA_BUILD', '20260812-001');
+define('FA_BUILD', '20260818-003');
 
 define('FA_FILE', __FILE__);
 define('FA_PATH', plugin_dir_path(__FILE__));

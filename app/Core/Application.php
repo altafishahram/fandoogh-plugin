@@ -20,6 +20,7 @@ use Fandoogh\Projects\Application as ProjectsApplication;
 use Fandoogh\Modules\Reviews\Module as ReviewsModule;
 use Fandoogh\Elementor\Application as ElementorApplication;
 use Fandoogh\Calculator\Application as CalculatorApplication;
+use Fandoogh\Modules\OrderCenter\Module as OrderCenterModule;
 
 
 final class Application
@@ -36,6 +37,7 @@ final class Application
         'reviews' => ReviewsModule::class,
         'customers' => CustomersApplication::class,
         'projects' => ProjectsApplication::class,
+        'order-center' => OrderCenterModule::class,
     ];
 
 
@@ -114,6 +116,7 @@ final class Application
         */
 
         (new ElementorApplication($modules))->boot();
+        (new \Fandoogh\LoginDesigner\Application())->boot();
 
     }
 

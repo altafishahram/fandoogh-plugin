@@ -103,11 +103,15 @@ foreach ($options as $option) {
 // Cached review aggregates have dynamic suffixes and therefore need prefix cleanup.
 $transientPrefix = $wpdb->esc_like('_transient_fa_review_') . '%';
 $timeoutPrefix = $wpdb->esc_like('_transient_timeout_fa_review_') . '%';
+$orderStatsPrefix = $wpdb->esc_like('_transient_fa_oc_stats_') . '%';
+$orderStatsTimeoutPrefix = $wpdb->esc_like('_transient_timeout_fa_oc_stats_') . '%';
 $wpdb->query(
     $wpdb->prepare(
-        "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+        "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s",
         $transientPrefix,
-        $timeoutPrefix
+        $timeoutPrefix,
+        $orderStatsPrefix,
+        $orderStatsTimeoutPrefix
     )
 );
 

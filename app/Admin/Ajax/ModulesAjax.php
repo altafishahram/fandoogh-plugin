@@ -6,6 +6,7 @@ namespace Fandoogh\Admin\Ajax;
 
 use Fandoogh\Core\Application;
 use Fandoogh\Managers\ModuleManager;
+use Fandoogh\Modules\OrderCenter\Module as OrderCenterModule;
 
 defined('ABSPATH') || exit;
 
@@ -36,6 +37,10 @@ final class ModulesAjax
         }
         if (! array_key_exists($module, $modules->registry())) {
             wp_send_json_error(['message' => __('ماژول انتخاب‌شده معتبر نیست.', 'fandoogh')], 400);
+        }
+
+        if ($module === 'order-center' && ! OrderCenterModule::isAvailable() && ! $modules->enabled($module)) {
+            wp_send_json_error(['message' => __('برای فعال‌سازی مرکز سفارشات، افزونه WooCommerce باید فعال باشد.', 'fandoogh')], 400);
         }
 
         $modules->toggle($module);

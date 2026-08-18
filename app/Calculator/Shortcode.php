@@ -23,14 +23,14 @@ final class Shortcode
     public function registerAssets(): void
     {
         wp_register_style(
-            Assets::FANDOOGH_CALCULATOR,
-            FA_URL . Assets::FANDOOGH_CALCULATOR_CSS,
+            Assets::CALCULATOR,
+            FA_URL . Assets::CALCULATOR_CSS,
             [],
             FA_BUILD
         );
         wp_register_script(
-            Assets::FANDOOGH_CALCULATOR,
-            FA_URL . Assets::FANDOOGH_CALCULATOR_JS,
+            Assets::CALCULATOR,
+            FA_URL . Assets::CALCULATOR_JS,
             [],
             FA_BUILD,
             true
@@ -58,7 +58,7 @@ final class Shortcode
         unset($attributes);
         $this->enqueueAssets();
         $products = Catalog::products();
-        $id = wp_unique_id('fa-fandoogh-calculator-');
+        $id = wp_unique_id('fa-calculator-');
         $settings = SettingsService::get();
         
         // CSS Variables for styling
@@ -69,17 +69,17 @@ final class Shortcode
 
         ob_start();
         ?>
-        <section class="fa-fandoogh-calculator" id="<?php echo esc_attr($id); ?>" dir="rtl" style="--fa-calc-opacity: <?php echo esc_attr((string)$opacity); ?>; --fa-calc-primary: <?php echo esc_attr($primary); ?>; --fa-calc-bg: <?php echo esc_attr($bg); ?>; --fa-calc-text: <?php echo esc_attr($text); ?>;">
-            <div class="fa-fandoogh-calculator__glow" aria-hidden="true"></div>
+        <section class="fa-calculator" id="<?php echo esc_attr($id); ?>" dir="rtl" style="--fa-calc-opacity: <?php echo esc_attr((string)$opacity); ?>; --fa-calc-primary: <?php echo esc_attr($primary); ?>; --fa-calc-bg: <?php echo esc_attr($bg); ?>; --fa-calc-text: <?php echo esc_attr($text); ?>;">
+            <div class="fa-calculator__glow" aria-hidden="true"></div>
 
             <?php if ($products === []) : ?>
-                <p class="fa-fandoogh-calculator__empty">هنوز محصولی به ماشین حساب اختصاص داده نشده است.</p>
+                <p class="fa-calculator__empty">هنوز محصولی به ماشین حساب اختصاص داده نشده است.</p>
             <?php else : ?>
-                <div class="fa-fandoogh-calculator__grid">
-                    <div class="fa-fandoogh-calculator__fields">
-                        <label class="fa-fandoogh-field">
+                <div class="fa-calculator__grid">
+                    <div class="fa-calculator__fields">
+                        <label class="fa-calculator-field">
                             <span>محصول</span>
-                            <select class="fa-fandoogh-product">
+                            <select class="fa-calculator-product">
                                 <option value="">انتخاب محصول…</option>
                                 <?php foreach ($products as $product) : ?>
                                     <option value="<?php echo esc_attr((string) $product->get_id()); ?>">
@@ -88,21 +88,21 @@ final class Shortcode
                                 <?php endforeach; ?>
                             </select>
                         </label>
-                        <div class="fa-fandoogh-variations" aria-live="polite"></div>
-                        <label class="fa-fandoogh-field">
+                        <div class="fa-calculator-variations" aria-live="polite"></div>
+                        <label class="fa-calculator-field">
                             <span><?php echo esc_html($settings['label_quantity']); ?></span>
-                            <input class="fa-fandoogh-meters" type="number" min="1" step="1" inputmode="numeric" placeholder="مثلاً ۲۵">
+                            <input class="fa-calculator-meters" type="number" min="1" step="1" inputmode="numeric" placeholder="مثلاً ۲۵">
                         </label>
-                        <div class="fa-fandoogh-fees" aria-live="polite"></div>
-                        <div class="fa-fandoogh-optional-fees" aria-live="polite"></div>
+                        <div class="fa-calculator-fees" aria-live="polite"></div>
+                        <div class="fa-calculator-optional-fees" aria-live="polite"></div>
                     </div>
 
-                    <aside class="fa-fandoogh-summary" aria-live="polite">
-                        <span class="fa-fandoogh-summary__eyebrow">پیش‌فاکتور شما</span>
-                        <div><small>قیمت هر <?php echo esc_html($settings['label_unit']); ?></small><strong class="fa-fandoogh-per-meter">—</strong></div>
-                        <div class="fa-fandoogh-summary__total"><small>هزینه کل پروژه</small><strong class="fa-fandoogh-total">—</strong></div>
-                        <button class="fa-fandoogh-order" type="button" disabled><?php echo esc_html($settings['label_submit']); ?></button>
-                        <p class="fa-fandoogh-status" role="status"></p>
+                    <aside class="fa-calculator-summary" aria-live="polite">
+                        <span class="fa-calculator-summary__eyebrow">پیش‌فاکتور شما</span>
+                        <div><small>قیمت هر <?php echo esc_html($settings['label_unit']); ?></small><strong class="fa-calculator-per-meter">—</strong></div>
+                        <div class="fa-calculator-summary__total"><small>هزینه کل پروژه</small><strong class="fa-calculator-total">—</strong></div>
+                        <button class="fa-calculator-order" type="button" disabled><?php echo esc_html($settings['label_submit']); ?></button>
+                        <p class="fa-calculator-status" role="status"></p>
                     </aside>
                 </div>
             <?php endif; ?>
@@ -113,21 +113,21 @@ final class Shortcode
 
     private function enqueueAssets(): void
     {
-        if (! wp_style_is(Assets::FANDOOGH_CALCULATOR, 'registered')) {
+        if (! wp_style_is(Assets::CALCULATOR, 'registered')) {
             $this->registerAssets();
         }
 
-        wp_enqueue_style(Assets::FANDOOGH_CALCULATOR);
-        wp_enqueue_script(Assets::FANDOOGH_CALCULATOR);
+        wp_enqueue_style(Assets::CALCULATOR);
+        wp_enqueue_script(Assets::CALCULATOR);
 
         // Shortcodes rendered after wp_head still need their stylesheet printed.
         if (did_action('wp_print_styles')) {
-            wp_print_styles(Assets::FANDOOGH_CALCULATOR);
+            wp_print_styles(Assets::CALCULATOR);
         }
 
         if (! self::$localized) {
             $settings = SettingsService::get();
-            wp_localize_script(Assets::FANDOOGH_CALCULATOR, 'faFandooghCalculator', [
+            wp_localize_script(Assets::CALCULATOR, 'faCalculator', [
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('fa_fandoogh_calculator'),
                 'productAction' => 'get_product_variations_and_fixed_prices',

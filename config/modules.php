@@ -34,5 +34,7 @@ return [
 
     'customers'   => false,
 
+    'order-center' => false,
+
 
 ];

@@ -14,6 +14,7 @@ final class Dashboard
         $default = match ($page) {
             'fa-modules' => 'modules',
             'fa-product-seo' => 'product_seo',
+            'fa-order-center' => 'order_center',
             'fa-calculator' => 'calculator',
             'fa-crm' => 'crm',
             'fa-theme' => 'theme',
@@ -22,7 +23,7 @@ final class Dashboard
             default => 'dashboard',
         };
         $section = sanitize_key(wp_unslash($_GET['section'] ?? $default));
-        if (! in_array($section, ['dashboard', 'modules', 'product_seo', 'calculator', 'crm', 'theme', 'settings', 'support'], true)) {
+        if (! in_array($section, ['dashboard', 'modules', 'product_seo', 'order_center', 'calculator', 'crm', 'theme', 'wp_dashboard', 'wp_login', 'settings', 'support'], true)) {
             $section = 'dashboard';
         }
 
@@ -32,7 +33,7 @@ final class Dashboard
             'product_seo' => ['ماژول سئو محصول', 'dashicons-products', 'fa-product-seo'],
             'calculator' => ['ماشین حساب', 'dashicons-calculator', 'fa-calculator'],
             'crm' => ['مدیریت CRM', 'dashicons-groups', 'fa-crm'],
-            'theme' => ['پوسته پنل', 'dashicons-art', 'fa-theme'],
+            'theme' => ['تنظیمات ظاهری', 'dashicons-art', 'fa-theme'],
             'settings' => ['تنظیمات', 'dashicons-admin-generic', 'fa-settings'],
             'support' => ['پشتیبانی', 'dashicons-heart', 'fa-support'],
         ];
@@ -47,6 +48,17 @@ final class Dashboard
                         <a class="fa-admin-nav-link <?php echo $section === $key ? 'is-active' : ''; ?>" data-section="<?php echo esc_attr($key); ?>" href="<?php echo esc_url(admin_url('admin.php?page=' . $slug)); ?>" <?php echo $section === $key ? 'aria-current="page"' : ''; ?>>
                             <span class="dashicons <?php echo esc_attr($icon); ?>" aria-hidden="true"></span><?php echo esc_html($label); ?>
                         </a>
+                        <?php if ($key === 'theme' && in_array($section, ['theme', 'wp_dashboard', 'wp_login'], true)) : ?>
+                            <div class="fa-admin-subnav" style="padding-right: 24px; display: flex; flex-direction: column; gap: 8px; margin-top: -6px; margin-bottom: 8px; position: relative;">
+                                <div style="position: absolute; right: 12px; top: 0; bottom: 15px; width: 2px; background: #e3e8ee; border-radius: 2px;"></div>
+                                <a class="fa-admin-nav-link <?php echo $section === 'wp_dashboard' ? 'is-active' : ''; ?>" data-section="wp_dashboard" href="<?php echo esc_url(admin_url('admin.php?page=fa-theme&section=wp_dashboard')); ?>" style="font-size: 13.5px; padding: 10px 14px;">
+                                    <span class="dashicons dashicons-wordpress" aria-hidden="true" style="font-size: 18px; width: 18px; height: 18px;"></span> پیشخوان وردپرس
+                                </a>
+                                <a class="fa-admin-nav-link <?php echo $section === 'wp_login' ? 'is-active' : ''; ?>" data-section="wp_login" href="<?php echo esc_url(admin_url('admin.php?page=fa-theme&section=wp_login')); ?>" style="font-size: 13.5px; padding: 10px 14px;">
+                                    <span class="dashicons dashicons-admin-users" aria-hidden="true" style="font-size: 18px; width: 18px; height: 18px;"></span> صفحه لاگین
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </nav>
                 <div class="fa-admin-version">نسخه <?php echo esc_html(FA_VERSION); ?></div>

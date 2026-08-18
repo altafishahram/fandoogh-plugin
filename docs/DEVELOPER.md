@@ -4,8 +4,9 @@
 
 - `app/Core`: بوت، ثابت‌ها، Container، Migration و چرخه عمر.
 - `app/Managers`: مدیریت پنل و وضعیت ماژول‌ها.
-- `modules`: ماژول‌های دسته محصول با Repository، Service و Renderer.
+- `modules`: ماژول‌های مستقل محتوایی و مرکز سفارشات با Repository، Service و Renderer.
 - `app/Customers` و `app/Projects`: نوع محتوا، taxonomy، ذخیره‌سازی و خروجی مستقل.
+- `modules/ordercenter`: مرکز سفارشات WooCommerce با Query/Stats/Meta Manager و Service مستقل.
 - `app/Elementor`: ثبت شرطی Dynamic Tagها.
 - `assets`: فایل‌های مدیریت و Frontend.
 
@@ -33,7 +34,7 @@ Migrationها در `app/Core/Migration/Migrator.php` به ترتیب نسخه ا
 
 ## امنیت
 
-- تمام عملیات AJAX مدیریت به `manage_options` و nonce نیاز دارند.
+- تمام عملیات AJAX مدیریت به nonce و capability متناسب با دامنه خود نیاز دارند؛ تنظیمات فندق `manage_options` و قیمت ماشین حساب/مرکز سفارشات `manage_woocommerce` را استفاده می‌کنند.
 - ثبت عمومی نظر دارای nonce، Honeypot و Rate Limit است.
 - ورودی‌ها پیش از ذخیره sanitize و خروجی‌ها متناسب با context escape می‌شوند.
 - HTML ویرایشگر با سیاست HTML امن وردپرس ذخیره می‌شود.
@@ -48,17 +49,18 @@ Migrationها در `app/Core/Migration/Migrator.php` به ترتیب نسخه ا
 
 ## تست
 
-از ریشه افزونه اجرا کنید:
+در بسته فعلی PHPUnit یا `tests\smoke.php` وجود ندارد. بررسی‌های ایستا را از ریشه افزونه اجرا کنید:
 
 ```powershell
-tests\smoke.php
+Get-ChildItem -Recurse -Filter *.php | ForEach-Object { php -l $_.FullName }
+Get-ChildItem -Recurse -Filter *.js | ForEach-Object { node --check $_.FullName }
 ```
 
-تست‌رانر تغییرات Activation و Migration را داخل transaction انجام می‌دهد و در پایان Rollback می‌کند. تست شاخه حذف کامل عمداً روی سایت واقعی اجرا نمی‌شود.
+تست runtime باید روی یک WordPress واقعی با WooCommerce فعال انجام شود و شامل فعال‌سازی/غیرفعال‌سازی ماژول‌ها، Migration، HPOS، ثبت سفارش، تغییر وضعیت و Uninstall باشد.
 
 ## انتشار
 
-نسخه هدر، `FA_VERSION`، `Stable tag` و شماره Build باید هم‌خوان باشند. سپس lint، smoke test و بررسی JavaScript اجرا و بسته‌ای بدون `.git`، `.agents`، `tests`، `tools` و خروجی‌های توسعه ساخته می‌شود.
+نسخه هدر، `FA_VERSION`، `Stable tag` و شماره Build باید هم‌خوان باشند. سپس lint، چک JavaScript و smoke checklist runtime اجرا و بسته‌ای بدون `.git`، `.agents`، `tests`، `tools` و خروجی‌های توسعه ساخته می‌شود.
 
 ## سیاست Uninstall
 

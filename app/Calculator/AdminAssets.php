@@ -12,8 +12,16 @@ final class AdminAssets
 {
     public function enqueue(): void
     {
-        wp_enqueue_style('woocommerce_admin_styles');
-        wp_enqueue_script('wc-enhanced-select');
+        if (wp_style_is('woocommerce_admin_styles', 'registered')) {
+            wp_enqueue_style('woocommerce_admin_styles');
+        }
+
+        $scriptDependencies = ['jquery'];
+        if (wp_script_is('wc-enhanced-select', 'registered')) {
+            wp_enqueue_script('wc-enhanced-select');
+            $scriptDependencies[] = 'wc-enhanced-select';
+        }
+
         wp_enqueue_style(
             Assets::CALCULATOR_ADMIN,
             FA_URL . Assets::CALCULATOR_ADMIN_CSS,
@@ -23,7 +31,7 @@ final class AdminAssets
         wp_enqueue_script(
             Assets::CALCULATOR_ADMIN,
             FA_URL . Assets::CALCULATOR_ADMIN_JS,
-            ['jquery', 'wc-enhanced-select'],
+            $scriptDependencies,
             FA_BUILD,
             true
         );

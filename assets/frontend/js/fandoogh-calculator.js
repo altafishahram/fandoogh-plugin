@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    const config = window.faFandooghCalculator || {};
+    const config = window.faCalculator || window.faFandooghCalculator || {};
     const formatter = new Intl.NumberFormat('fa-IR', {maximumFractionDigits: 0});
 
     function money(value) {
@@ -36,15 +36,15 @@
     class FandooghCalculator {
         constructor(root) {
             this.root = root;
-            this.product = root.querySelector('.fa-fandoogh-product');
-            this.meters = root.querySelector('.fa-fandoogh-meters');
-            this.variationsNode = root.querySelector('.fa-fandoogh-variations');
-            this.feesNode = root.querySelector('.fa-fandoogh-fees');
-            this.optionalFeesNode = root.querySelector('.fa-fandoogh-optional-fees');
-            this.perMeterNode = root.querySelector('.fa-fandoogh-per-meter');
-            this.totalNode = root.querySelector('.fa-fandoogh-total');
-            this.orderButton = root.querySelector('.fa-fandoogh-order');
-            this.statusNode = root.querySelector('.fa-fandoogh-status');
+            this.product = root.querySelector('.fa-calculator-product');
+            this.meters = root.querySelector('.fa-calculator-meters');
+            this.variationsNode = root.querySelector('.fa-calculator-variations');
+            this.feesNode = root.querySelector('.fa-calculator-fees');
+            this.optionalFeesNode = root.querySelector('.fa-calculator-optional-fees');
+            this.perMeterNode = root.querySelector('.fa-calculator-per-meter');
+            this.totalNode = root.querySelector('.fa-calculator-total');
+            this.orderButton = root.querySelector('.fa-calculator-order');
+            this.statusNode = root.querySelector('.fa-calculator-status');
             this.data = null;
             this.variation = null;
             this.selectedOptionalFees = new Set();
@@ -125,11 +125,11 @@
             const fragment = document.createDocumentFragment();
             (this.data.attributes || []).forEach((attribute) => {
                 const label = document.createElement('label');
-                label.className = 'fa-fandoogh-field';
+                label.className = 'fa-calculator-field';
                 const title = document.createElement('span');
                 title.textContent = attribute.label;
                 const select = document.createElement('select');
-                select.className = 'fa-fandoogh-attribute';
+                select.className = 'fa-calculator-attribute';
                 select.dataset.attribute = attribute.key;
                 select.append(createOption('', 'انتخاب ' + attribute.label + '…'));
                 (attribute.options || []).forEach((option) => {
@@ -156,7 +156,7 @@
                 const title = document.createElement('strong');
                 title.textContent = config.labelMandatoryFees || 'هزینه‌های لحاظ‌شده';
                 const list = document.createElement('div');
-                list.className = 'fa-fandoogh-fees__list';
+                list.className = 'fa-calculator-fees__list';
                 mandatoryFees.forEach((fee) => {
                     const badge = document.createElement('span');
                     const suffix = fee.type === 'per_meter' ? ` / ${this.unitLabel}` : '';
@@ -175,7 +175,7 @@
                     const fragment = document.createDocumentFragment();
                     optionalFees.forEach((fee) => {
                         const label = document.createElement('label');
-                        label.className = 'fa-fandoogh-optional-fee';
+                        label.className = 'fa-calculator-optional-fee';
                         
                         const checkbox = document.createElement('input');
                         checkbox.type = 'checkbox';
@@ -200,7 +200,7 @@
 
         updateVariation() {
             if (!this.data) return;
-            const selects = Array.from(this.variationsNode.querySelectorAll('.fa-fandoogh-attribute'));
+            const selects = Array.from(this.variationsNode.querySelectorAll('.fa-calculator-attribute'));
             const selected = {};
             let complete = true;
             selects.forEach((select) => {
@@ -348,7 +348,7 @@
         }
     }
 
-    document.querySelectorAll('.fa-fandoogh-calculator').forEach(function (root) {
+    document.querySelectorAll('.fa-calculator').forEach(function (root) {
         new FandooghCalculator(root);
     });
 })();

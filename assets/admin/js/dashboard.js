@@ -28,6 +28,7 @@
         try {
             const data = await request({action: 'fa_load_admin_section', nonce: faAdmin.nonce, section: section});
             $content.html(data.html).attr('data-section', data.section);
+            ensureSectionAssets(data.section);
             $('.fa-admin-nav-link').removeClass('is-active').removeAttr('aria-current')
                 .filter('[data-section="' + data.section + '"]').addClass('is-active').attr('aria-current', 'page');
             if (push) history.pushState({faSection: data.section}, '', faAdmin.urls[data.section]);
@@ -40,6 +41,26 @@
             $content.removeClass('fa-loading').removeAttr('aria-busy');
         }
     }
+
+    function ensureSectionAssets(section) {
+        if (section !== 'order_center' || !faAdmin.orderCenterEnabled || !faAdmin.orderCenterAssets) return;
+        if (!document.getElementById('fa-order-center-admin-css')) {
+            const link = document.createElement('link');
+            link.id = 'fa-order-center-admin-css';
+            link.rel = 'stylesheet';
+            link.href = faAdmin.orderCenterAssets.css + '?ver=' + encodeURIComponent(faAdmin.build || '1');
+            document.head.appendChild(link);
+        }
+        if (!document.getElementById('fa-order-center-admin-js')) {
+            const script = document.createElement('script');
+            script.id = 'fa-order-center-admin-js';
+            script.src = faAdmin.orderCenterAssets.js + '?ver=' + encodeURIComponent(faAdmin.build || '1');
+            script.defer = true;
+            document.body.appendChild(script);
+        }
+    }
+
+    ensureSectionAssets($content.data('section'));
 
     $(document).on('click', '.fa-admin-nav-link', function (event) {
         if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
@@ -72,7 +93,7 @@
 
     window.addEventListener('popstate', function () {
         const page = new URL(window.location.href).searchParams.get('page');
-        const map = {'fa-modules': 'modules', 'fa-product-seo': 'product_seo', 'fa-calculator': 'calculator', 'fa-crm': 'crm', 'fa-theme': 'theme', 'fa-settings': 'settings', 'fa-support': 'support'};
+        const map = {'fa-modules': 'modules', 'fa-product-seo': 'product_seo', 'fa-order-center': 'order_center', 'fa-calculator': 'calculator', 'fa-crm': 'crm', 'fa-theme': 'theme', 'fa-settings': 'settings', 'fa-support': 'support'};
         load(map[page] || 'dashboard', false);
     });
 })(jQuery);

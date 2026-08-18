@@ -11,13 +11,11 @@ The calculator is available from **Fandoogh > ماشین حساب** and through:
 The front-end product list contains:
 
 - published visible products assigned to at least one fixed-price row;
-- published visible products in the `fandoogh` product category.
+- published visible products in the product categories selected under **فندق ← ماشین حساب**.
 
-Category slugs can be changed without editing the module:
-
-```php
-add_filter('fa_calculator_product_category_slugs', static fn (): array => ['fandoogh', 'metal-fandoogh']);
-```
+When no category is selected, all published visible products are eligible. Products
+explicitly mapped to a fixed-price row remain eligible even when category filtering
+is enabled.
 
 ## Fixed prices
 

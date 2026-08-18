@@ -39,6 +39,27 @@ final class AdminPage
                 flex: 1 1 100% !important;
                 box-sizing: border-box;
             }
+            /* رسپانسیو برای تبلت (عمودی و افقی) */
+            @media screen and (max-width: 1100px) {
+                .fa-calculator-admin-grid > section:nth-of-type(1),
+                .fa-calculator-admin-grid > section:nth-of-type(2) {
+                    flex: 1 1 calc((100% - 16px) / 2) !important;
+                }
+                .fa-calculator-admin-grid > section:nth-of-type(3),
+                .fa-calculator-admin-grid > section:nth-of-type(4) {
+                    flex: 1 1 100% !important;
+                }
+            }
+            /* رسپانسیو برای موبایل */
+            @media screen and (max-width: 767px) {
+                .fa-calculator-admin-grid {
+                    flex-direction: column;
+                }
+                .fa-calculator-admin-grid > section:nth-of-type(-n+4) {
+                    flex: 1 1 100% !important;
+                    width: 100% !important;
+                }
+            }
             .fa-calculator-admin-actions-wrap {
                 flex: 1 1 100%;
                 display: flex;
