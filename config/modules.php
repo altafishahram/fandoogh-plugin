@@ -22,6 +22,8 @@ return [
 
     'product_reason' => true,
 
+    'mega_menu' => false,
+
     /*
     |--------------------------------------------------------------------------
     | Future Modules

@@ -13,8 +13,8 @@ final class Dashboard
         $page = sanitize_key(wp_unslash($_GET['page'] ?? 'fa'));
         $default = match ($page) {
             'fa-modules' => 'modules',
+            'fa-mega-menu' => 'mega_menu',
             'fa-product-seo' => 'product_seo',
-            'fa-calculator' => 'calculator',
             'fa-crm' => 'crm',
             'fa-theme' => 'theme',
             'fa-settings' => 'settings',
@@ -22,15 +22,15 @@ final class Dashboard
             default => 'dashboard',
         };
         $section = sanitize_key(wp_unslash($_GET['section'] ?? $default));
-        if (! in_array($section, ['dashboard', 'modules', 'product_seo', 'calculator', 'crm', 'theme', 'settings', 'support'], true)) {
+        if (! in_array($section, ['dashboard', 'modules', 'mega_menu', 'product_seo', 'crm', 'theme', 'settings', 'support'], true)) {
             $section = 'dashboard';
         }
 
         $items = [
             'dashboard' => ['پیشخوان', 'dashicons-dashboard', 'fa'],
             'modules' => ['ماژول سئو دسته‌بندی محصولات', 'dashicons-admin-site-alt3', 'fa-modules'],
+            'mega_menu' => ['تنظیمات مگا منو', 'dashicons-menu-alt3', 'fa-mega-menu'],
             'product_seo' => ['ماژول سئو محصول', 'dashicons-products', 'fa-product-seo'],
-            'calculator' => ['ماشین حساب', 'dashicons-calculator', 'fa-calculator'],
             'crm' => ['مدیریت CRM', 'dashicons-groups', 'fa-crm'],
             'theme' => ['پوسته پنل', 'dashicons-art', 'fa-theme'],
             'settings' => ['تنظیمات', 'dashicons-admin-generic', 'fa-settings'],

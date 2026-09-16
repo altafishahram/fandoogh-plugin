@@ -20,10 +20,10 @@ final class Sections
 
         if ($section === 'modules') {
             self::modules();
+        } elseif ($section === 'mega_menu') {
+            self::megaMenu();
         } elseif ($section === 'product_seo') {
             self::productSeo();
-        } elseif ($section === 'calculator') {
-            \Fandoogh\Calculator\AdminPage::render();
         } elseif ($section === 'crm') {
             self::crm();
         } elseif ($section === 'theme') {
@@ -42,7 +42,9 @@ final class Sections
     private static function dashboard(): void
     {
         $modules = Application::instance()->get('modules');
-        $enabled = $modules instanceof ModuleManager ? count(array_filter($modules->all())) : 0;
+        $enabled = $modules instanceof ModuleManager
+            ? count(array_filter(array_intersect_key($modules->all(), $modules->registry())))
+            : 0;
         $customers = wp_count_posts('fa_customer');
         $projects = wp_count_posts('fa_project');
         $comments = wp_count_comments();
@@ -54,12 +56,12 @@ final class Sections
         ];
         $health = [
             ['وردپرس', get_bloginfo('version'), true],
-            ['PHP', PHP_VERSION, version_compare(PHP_VERSION, '8.2', '>=')],
+            ['PHP', PHP_VERSION, version_compare(PHP_VERSION, '8.1', '>=')],
             ['ووکامرس', defined('WC_VERSION') ? WC_VERSION : 'غیرفعال', defined('WC_VERSION')],
             ['Elementor', defined('ELEMENTOR_VERSION') ? ELEMENTOR_VERSION : 'غیرفعال', defined('ELEMENTOR_VERSION')],
         ];
         ?>
-        <header class="fa-admin-welcome"><div><h1 tabindex="-1">پیشخوان فندق</h1><p>مدیریت یکپارچه قابلیت‌ها و وضعیت فریم‌ورک</p></div><span class="fa-admin-build">Build <?php echo esc_html(FA_BUILD); ?></span></header>
+        <header class="fa-admin-welcome"><div><h1 tabindex="-1">پیشخوان فندق</h1><p>مدیریت یکپارچه قابلیت‌ها و وضعیت فریم‌ورک</p></div><span class="fa-admin-build">نسخه <?php echo esc_html(FA_VERSION); ?></span></header>
         <section class="fa-admin-stats" aria-label="آمار افزونه"><?php foreach ($stats as [$label, $value, $icon]) : ?><article class="fa-admin-stat"><span class="dashicons <?php echo esc_attr($icon); ?>" aria-hidden="true"></span><div><strong><?php echo esc_html((string) $value); ?></strong><small><?php echo esc_html($label); ?></small></div></article><?php endforeach; ?></section>
         <section class="fa-admin-grid"><article class="fa-panel"><header><span class="dashicons dashicons-shield" aria-hidden="true"></span><h2>سلامت سیستم</h2></header><div class="fa-health-list"><?php foreach ($health as [$label, $value, $ok]) : ?><div><span><?php echo esc_html($label); ?></span><b class="<?php echo $ok ? 'is-ok' : 'is-warning'; ?>"><?php echo esc_html((string) $value); ?></b></div><?php endforeach; ?></div></article><article class="fa-panel"><header><span class="dashicons dashicons-admin-links" aria-hidden="true"></span><h2>دسترسی سریع</h2></header><div class="fa-quick-links"><a href="<?php echo esc_url(admin_url('post-new.php?post_type=fa_customer')); ?>">افزودن مشتری</a><a href="<?php echo esc_url(admin_url('post-new.php?post_type=fa_project')); ?>">افزودن پروژه</a><a href="<?php echo esc_url(admin_url('edit-comments.php')); ?>">مدیریت نظرات</a><a href="<?php echo esc_url(admin_url('edit-tags.php?taxonomy=product_cat&post_type=product')); ?>">دسته‌های محصول</a></div></article></section>
         <?php
@@ -69,7 +71,7 @@ final class Sections
     {
         ?>
         <header class="fa-admin-welcome"><div><h1 tabindex="-1">ماژول سئو دسته‌بندی محصولات</h1><p>محتوای تکمیلی و تعاملی دسته‌های محصولات ووکامرس را مدیریت کنید.</p></div></header>
-        <?php self::moduleCards(['description', 'video', 'faq', 'reviews']); ?>
+        <?php self::moduleCards(['description', 'video', 'faq', 'mega_menu', 'reviews']); ?>
         <?php
     }
 
@@ -100,6 +102,11 @@ final class Sections
         </section>
         <?php self::moduleCards(['product_faq', 'product_reason']); ?>
         <?php
+    }
+
+    private static function megaMenu(): void
+    {
+        \Fandoogh\Modules\MegaMenu\Admin::renderPage();
     }
 
     private static function crm(): void
@@ -138,7 +145,18 @@ final class Sections
                 ?>
                 <article class="fa-module-card">
                     <div class="fa-module-header"><span class="fa-module-icon"><span class="dashicons <?php echo esc_attr($item['icon'] ?? 'dashicons-admin-plugins'); ?>" aria-hidden="true"></span></span><div class="fa-module-title"><h2><?php echo esc_html($item['title'] ?? $key); ?></h2><small><?php echo esc_html($item['description'] ?? ''); ?></small></div></div>
-                    <div class="fa-module-footer"><span class="fa-status"><?php echo $on ? 'فعال' : 'غیرفعال'; ?></span><label class="fa-toggle"><span class="screen-reader-text"><?php echo esc_html('تغییر وضعیت ' . ($item['title'] ?? $key)); ?></span><input class="fa-module-toggle" type="checkbox" data-module="<?php echo esc_attr($key); ?>" <?php checked($on); ?>><span class="fa-toggle-slider" aria-hidden="true"></span></label></div>
+                    <div class="fa-module-footer">
+                        <span class="fa-status"><?php echo $on ? 'فعال' : 'غیرفعال'; ?></span>
+                        <form class="fa-module-toggle-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                            <input type="hidden" name="action" value="fa_toggle_module">
+                            <input type="hidden" name="module" value="<?php echo esc_attr($key); ?>">
+                            <?php wp_nonce_field('fa_modules', 'nonce'); ?>
+                            <button class="fa-toggle-button" type="submit" aria-pressed="<?php echo $on ? 'true' : 'false'; ?>">
+                                <span class="screen-reader-text"><?php echo esc_html('تغییر وضعیت ' . ($item['title'] ?? $key)); ?></span>
+                                <span class="fa-toggle-slider" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                    </div>
                 </article>
             <?php endforeach; ?>
         </section>

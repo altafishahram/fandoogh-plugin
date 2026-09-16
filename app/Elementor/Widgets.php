@@ -82,6 +82,12 @@ final class Widgets
             );
         }
 
+        if ($this->modules->enabled('mega_menu')) {
+            $manager->register(
+                new \Fandoogh\Modules\MegaMenu\ElementorWidget()
+            );
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Reviews

@@ -3,9 +3,9 @@
  * Plugin Name: Fandoogh Framework
  * Plugin URI: https://fandoogh.ir
  * Description: فریم‌ورک حرفه‌ای فندق برای وردپرس، ووکامرس و المنتور.
- * Version: 1.0.0
+ * Version: 1.4.2
  * Requires at least: 6.8
- * Requires PHP: 8.2
+ * Requires PHP: 8.1
  * Requires Plugins: woocommerce
  * Author: فندق
  * Author URI: https://fandoogh.ir
@@ -17,8 +17,8 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-define('FA_VERSION', '1.0.0');
-define('FA_BUILD', '20260812-001');
+define('FA_VERSION', '1.4.2');
+define('FA_BUILD', '20260916-001');
 
 define('FA_FILE', __FILE__);
 define('FA_PATH', plugin_dir_path(__FILE__));
@@ -49,4 +49,14 @@ add_action(
     }
 );
 
-Fandoogh\Core\Application::instance();
+/*
+ * Boot after WordPress has initialized translations. This prevents third-party
+ * localization plugins from loading their text domain during plugin discovery.
+ */
+add_action(
+    'init',
+    static function (): void {
+        Fandoogh\Core\Application::instance();
+    },
+    1
+);

@@ -144,26 +144,34 @@
 */
 
 
-.fa-toggle {
+.fa-module-toggle-form {
 
     position: relative;
 
     display: inline-block;
 
+    margin: 0;
+}
+
+.fa-toggle-button {
+
+    position: relative;
+
+    display: block;
+
     width: 52px;
 
     height: 28px;
 
-}
+    padding: 0;
 
+    border: 0;
 
-.fa-toggle input {
+    border-radius: 30px;
 
-    opacity: 0;
+    background: transparent;
 
-    width: 0;
-
-    height: 0;
+    cursor: pointer;
 
 }
 
@@ -208,22 +216,22 @@
 }
 
 
-.fa-toggle input:checked + .fa-toggle-slider {
+.fa-toggle-button[aria-pressed="true"] .fa-toggle-slider {
 
     background: #2271b1;
 
 }
 
 
-.fa-toggle input:checked + .fa-toggle-slider:before {
+.fa-toggle-button[aria-pressed="true"] .fa-toggle-slider:before {
 
     transform: translateX(24px);
 
 }
 
-.fa-toggle { direction: ltr; }
-.fa-toggle input:focus-visible + .fa-toggle-slider { outline: 3px solid #1d65a6; outline-offset: 3px; }
-.fa-toggle input:disabled + .fa-toggle-slider { cursor: progress; opacity: .65; }
+.fa-module-toggle-form { direction: ltr; }
+.fa-toggle-button:focus-visible .fa-toggle-slider { outline: 3px solid #1d65a6; outline-offset: 3px; }
+.fa-toggle-button:disabled .fa-toggle-slider { cursor: progress; opacity: .65; }
 
 @media (max-width: 480px) {
     .fa-modules-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
@@ -253,6 +261,6 @@
     border-top-color: rgba(91, 123, 146, .16);
 }
 
-.fa-toggle input:checked + .fa-toggle-slider {
+.fa-toggle-button[aria-pressed="true"] .fa-toggle-slider {
     background: linear-gradient(135deg, #118eea, #15c5eb);
 }

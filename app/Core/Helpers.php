@@ -16,13 +16,3 @@ if (! function_exists('fa')) {
         return \Fandoogh\Core\Application::instance();
     }
 }
-
-if (! function_exists('get_active_fixed_prices_for_product')) {
-    /**
-     * Return active fixed-price rows mapped to a WooCommerce product.
-     */
-    function get_active_fixed_prices_for_product(int $product_id): array
-    {
-        return \Fandoogh\Calculator\FixedPriceService::activeForProduct(absint($product_id));
-    }
-}

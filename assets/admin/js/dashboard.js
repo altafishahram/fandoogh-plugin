@@ -72,7 +72,7 @@
 
     window.addEventListener('popstate', function () {
         const page = new URL(window.location.href).searchParams.get('page');
-        const map = {'fa-modules': 'modules', 'fa-product-seo': 'product_seo', 'fa-calculator': 'calculator', 'fa-crm': 'crm', 'fa-theme': 'theme', 'fa-settings': 'settings', 'fa-support': 'support'};
+        const map = {'fa-modules': 'modules', 'fa-mega-menu': 'mega_menu', 'fa-product-seo': 'product_seo', 'fa-crm': 'crm', 'fa-theme': 'theme', 'fa-settings': 'settings', 'fa-support': 'support'};
         load(map[page] || 'dashboard', false);
     });
 })(jQuery);

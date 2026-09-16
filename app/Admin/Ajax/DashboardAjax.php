@@ -25,7 +25,7 @@ final class DashboardAjax
         }
 
         $section = sanitize_key(wp_unslash($_POST['section'] ?? 'dashboard'));
-        if (! in_array($section, ['dashboard', 'modules', 'product_seo', 'calculator', 'crm', 'theme', 'settings', 'support'], true)) {
+        if (! in_array($section, ['dashboard', 'modules', 'mega_menu', 'product_seo', 'crm', 'theme', 'settings', 'support'], true)) {
             $section = 'dashboard';
         }
 

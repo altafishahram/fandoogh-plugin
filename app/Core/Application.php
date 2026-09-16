@@ -14,12 +14,13 @@ use Fandoogh\Modules\Description\Module as DescriptionModule;
 use Fandoogh\Modules\Video\Module as VideoModule;
 use Fandoogh\Modules\Faq\Module as FaqModule;
 use Fandoogh\Modules\Faq\ProductModule as ProductSeoModule;
+use Fandoogh\Modules\MegaMenu\Module as MegaMenuModule;
+use Fandoogh\Modules\MegaMenu\Admin as MegaMenuAdmin;
 
 use Fandoogh\Customers\Application as CustomersApplication;
 use Fandoogh\Projects\Application as ProjectsApplication;
 use Fandoogh\Modules\Reviews\Module as ReviewsModule;
 use Fandoogh\Elementor\Application as ElementorApplication;
-use Fandoogh\Calculator\Application as CalculatorApplication;
 
 
 final class Application
@@ -33,6 +34,7 @@ final class Application
         'description' => DescriptionModule::class,
         'video' => VideoModule::class,
         'faq' => FaqModule::class,
+        'mega_menu' => MegaMenuModule::class,
         'reviews' => ReviewsModule::class,
         'customers' => CustomersApplication::class,
         'projects' => ProjectsApplication::class,
@@ -76,7 +78,6 @@ final class Application
 
         $admin->boot();
 
-
         /*
         |--------------------------------------------------------------------------
         | Register Services
@@ -93,6 +94,11 @@ final class Application
             $modules
         );
 
+        // The settings handler remains available even while the frontend module is disabled.
+        if (is_admin()) {
+            (new MegaMenuAdmin())->boot();
+        }
+
 
         foreach (self::MODULES as $key => $moduleClass) {
             if ($modules->enabled($key)) {
@@ -103,9 +109,6 @@ final class Application
         if ($modules->enabled('product_faq') || $modules->enabled('product_reason')) {
             (new ProductSeoModule($modules))->boot();
         }
-
-        (new CalculatorApplication())->boot();
-
 
         /*
         |--------------------------------------------------------------------------

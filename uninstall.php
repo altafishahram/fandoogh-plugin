@@ -63,8 +63,6 @@ foreach (['fa_customer_category', 'fa_project_category'] as $taxonomy) {
     }
 }
 
-global $wpdb;
-
 $postMetaKeys = [
     'fa_customer', 'fa_project', 'fa_review_object_type', 'fa_review_object_id',
     'fa_meta_title', 'fa_meta_description',
@@ -94,13 +92,14 @@ $options = [
     'fa_project_rewrite_version', 'fa_customer_category_children',
     'fa_project_category_children',
     'fa_admin_theme_settings', 'fa_admin_theme_asset', 'fa_admin_theme_schema_version', 'fa_admin_theme_generation_lock',
-    'fa_calculator_fixed_prices',
+    'fa_mega_menu_settings',
 ];
 foreach ($options as $option) {
     delete_option($option);
 }
 
 // Cached review aggregates have dynamic suffixes and therefore need prefix cleanup.
+global $wpdb;
 $transientPrefix = $wpdb->esc_like('_transient_fa_review_') . '%';
 $timeoutPrefix = $wpdb->esc_like('_transient_timeout_fa_review_') . '%';
 $wpdb->query(
