@@ -11,7 +11,7 @@ final class RateLimiter
     private const WINDOW = 900;
     private const LIMIT = 3;
 
-    public function check(int $termId, string $email): true|\WP_Error
+    public function check(int $termId, string $email): bool|\WP_Error
     {
         $key = $this->key($termId, $email);
         $attempts = (int) get_transient($key);

@@ -51,9 +51,6 @@ final class Shortcodes
     /** Product purchase reason */
     public const PRODUCT_REASON = 'fa_product_reason';
 
-    /** Fandoogh price calculator */
-    public const FANDOOGH_CALCULATOR = 'fandoogh_calculator';
-
     /**
      * Reviews
      */

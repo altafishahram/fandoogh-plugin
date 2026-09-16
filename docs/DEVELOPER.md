@@ -1,4 +1,4 @@
-# مستندات توسعه Fandoogh Framework 1.0.0
+# مستندات توسعه Fandoogh Framework 1.3.0
 
 ## معماری
 
@@ -9,7 +9,7 @@
 - `app/Elementor`: ثبت شرطی Dynamic Tagها.
 - `assets`: فایل‌های مدیریت و Frontend.
 
-Namespace اصلی `Fandoogh\\` است. Autoloader کلاس‌های `app` را مستقیم و namespace ماژول‌ها را از `modules/{module}` بارگذاری می‌کند.
+Namespace اصلی `Fandoogh\\` است. Autoloader کلاس‌های `app` را مستقیم و namespace ماژول‌ها را از `modules/{module}` بارگذاری می‌کند. مسیر ماژول نظرات به‌صورت صریح `modules/Reviews` است؛ حساسیت حروف مسیر باید روی هاست لینوکسی رعایت شود.
 
 ## قرارداد لایه‌ها
 
@@ -41,7 +41,7 @@ Migrationها در `app/Core/Migration/Migrator.php` به ترتیب نسخه ا
 ## سازگاری
 
 - حداقل WordPress: 6.8
-- حداقل PHP: 8.2
+- حداقل PHP: 8.1
 - وابستگی الزامی: WooCommerce
 - Elementor اختیاری است و Hook ثبت Dynamic Tag با نسخه نصب‌شده تطبیق داده می‌شود.
 - سازگاری WooCommerce HPOS در `before_woocommerce_init` اعلام شده است.
@@ -50,11 +50,12 @@ Migrationها در `app/Core/Migration/Migrator.php` به ترتیب نسخه ا
 
 از ریشه افزونه اجرا کنید:
 
-```powershell
-tests\smoke.php
+```text
+php tests/autoloader.php
+php tests/reviews-rate-limiter.php
 ```
 
-تست‌رانر تغییرات Activation و Migration را داخل transaction انجام می‌دهد و در پایان Rollback می‌کند. تست شاخه حذف کامل عمداً روی سایت واقعی اجرا نمی‌شود.
+این آزمون‌ها مستقل از سایت و با داده‌های ساختگی اجرا می‌شوند. آزمون autoloader حساسیت حروف مسیر را حتی روی ویندوز بررسی می‌کند. پیش از انتشار، lint همه فایل‌های `app`، `modules`، `config` و فایل ورودی با PHP 8.1 اجرا شود؛ فقط بررسی فایل‌های `app` کافی نیست. این بررسی‌ها جای نصب واقعی وردپرس و ووکامرس را نمی‌گیرند.
 
 ## انتشار
 

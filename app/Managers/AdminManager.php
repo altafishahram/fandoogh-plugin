@@ -12,7 +12,6 @@ use Fandoogh\AdminTheme\SettingsSchema;
 use Fandoogh\AdminTheme\ThemeManager;
 use Fandoogh\Admin\Menu;
 use Fandoogh\Core\Constants\Assets;
-use Fandoogh\Calculator\AdminAssets as CalculatorAdminAssets;
 
 defined('ABSPATH') || exit;
 
@@ -31,7 +30,7 @@ final class AdminManager
     public function assets(): void
     {
         $page = sanitize_key(wp_unslash($_GET['page'] ?? ''));
-        $pages = ['fa', 'fa-modules', 'fa-product-seo', 'fa-calculator', 'fa-crm', 'fa-theme', 'fa-settings', 'fa-support'];
+        $pages = ['fa', 'fa-modules', 'fa-mega-menu', 'fa-product-seo', 'fa-crm', 'fa-theme', 'fa-settings', 'fa-support'];
         if (! in_array($page, $pages, true)) {
             return;
         }
@@ -44,8 +43,8 @@ final class AdminManager
             'urls' => [
                 'dashboard' => admin_url('admin.php?page=fa'),
                 'modules' => admin_url('admin.php?page=fa-modules'),
+                'mega_menu' => admin_url('admin.php?page=fa-mega-menu'),
                 'product_seo' => admin_url('admin.php?page=fa-product-seo'),
-                'calculator' => admin_url('admin.php?page=fa-calculator'),
                 'crm' => admin_url('admin.php?page=fa-crm'),
                 'theme' => admin_url('admin.php?page=fa-theme'),
                 'settings' => admin_url('admin.php?page=fa-settings'),
@@ -58,9 +57,6 @@ final class AdminManager
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('fa_modules'),
         ]);
-
-        (new CalculatorAdminAssets())->enqueue();
-
         wp_enqueue_script(
             Assets::ADMIN_THEME_MANAGER,
             FA_URL . Assets::ADMIN_THEME_MANAGER_JS,

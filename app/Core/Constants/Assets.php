@@ -51,10 +51,6 @@ final class Assets
 
     public const ELEMENTOR = 'fa-elementor';
 
-    public const CALCULATOR_ADMIN = 'fa-calculator-admin';
-
-    public const FANDOOGH_CALCULATOR = 'fa-fandoogh-calculator';
-
     /*
     |--------------------------------------------------------------------------
     | CSS
@@ -87,10 +83,6 @@ final class Assets
 
     public const ELEMENTOR_CSS = 'assets/css/elementor.css';
 
-    public const CALCULATOR_ADMIN_CSS = 'assets/admin/css/calculator.css';
-
-    public const FANDOOGH_CALCULATOR_CSS = 'assets/frontend/css/fandoogh-calculator.css';
-
     /*
     |--------------------------------------------------------------------------
     | JavaScript
@@ -111,7 +103,4 @@ final class Assets
 
     public const ELEMENTOR_JS = 'assets/js/elementor.js';
 
-    public const CALCULATOR_ADMIN_JS = 'assets/admin/js/calculator.js';
-
-    public const FANDOOGH_CALCULATOR_JS = 'assets/frontend/js/fandoogh-calculator.js';
 }

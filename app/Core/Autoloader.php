@@ -14,6 +14,17 @@ final class Autoloader
     private const MODULE_NAMESPACE = 'Modules\\';
 
     /**
+     * Module namespaces whose on-disk directory does not use the default
+     * lowercase convention.
+     *
+     * @var array<string, string>
+     */
+    private const MODULE_DIRECTORIES = [
+        'Reviews' => 'Reviews',
+        'MegaMenu' => 'mega-menu',
+    ];
+
+    /**
      * Register autoloader.
      */
     public static function register(): void
@@ -57,28 +68,38 @@ final class Autoloader
         |--------------------------------------------------------------------------
         */
 
-        if (str_starts_with($relative, self::MODULE_NAMESPACE)) {
+        $moduleFile = self::resolveModuleFile($relative);
 
-            $module = substr($relative, strlen(self::MODULE_NAMESPACE));
-
-            $parts = explode('\\', $module);
-
-            if (count($parts) < 2) {
-                return;
-            }
-
-            $folder = strtolower(array_shift($parts));
-
-            $file = FA_PATH .
-                'modules/' .
-                $folder .
-                '/' .
-                implode(DIRECTORY_SEPARATOR, $parts) .
-                '.php';
-
-            if (is_file($file)) {
-                require_once $file;
-            }
+        if ($moduleFile !== null && is_file($moduleFile)) {
+            require_once $moduleFile;
         }
+    }
+
+    /**
+     * Resolve a class relative to the Fandoogh namespace to a module file.
+     */
+    private static function resolveModuleFile(string $relative): ?string
+    {
+        if (! str_starts_with($relative, self::MODULE_NAMESPACE)) {
+            return null;
+        }
+
+        $module = substr($relative, strlen(self::MODULE_NAMESPACE));
+        $parts = explode('\\', $module);
+
+        if (count($parts) < 2) {
+            return null;
+        }
+
+        $namespace = array_shift($parts);
+        $folder = self::MODULE_DIRECTORIES[$namespace]
+            ?? strtolower($namespace);
+
+        return FA_PATH .
+            'modules/' .
+            $folder .
+            '/' .
+            implode(DIRECTORY_SEPARATOR, $parts) .
+            '.php';
     }
 }

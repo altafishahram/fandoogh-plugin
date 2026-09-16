@@ -45,10 +45,6 @@ final class Options
 
     public const ADMIN_THEME_GENERATION_LOCK = 'fa_admin_theme_generation_lock';
 
-    public const CALCULATOR_FIXED_PRICES = 'fa_calculator_fixed_prices';
-
-    public const CALCULATOR_SETTINGS = 'fa_calculator_settings';
-
     /**
      * Plugin version.
      */

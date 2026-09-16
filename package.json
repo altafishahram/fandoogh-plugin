@@ -1,0 +1,14 @@
+{
+  "name": "fandoogh-framework",
+  "private": true,
+  "version": "1.4.2",
+  "scripts": {
+    "test:php": "php tests/autoloader.php && php tests/reviews-rate-limiter.php",
+    "test:js": "vitest run",
+    "test": "npm run test:php && npm run test:js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "vitest": "^3.2.4"
+  }
+}

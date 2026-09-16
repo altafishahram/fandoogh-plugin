@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Fandoogh\Core\Constants\Meta\ReviewMeta;
+use Fandoogh\Core\JalaliDate;
 
 defined('ABSPATH') || exit;
 
@@ -28,6 +29,15 @@ $rating = (int) get_comment_meta(
     true
 );
 
+$reviewDate = '—';
+if (!empty($review->comment_date_gmt) && $review->comment_date_gmt !== '0000-00-00 00:00:00') {
+    try {
+        $reviewDate = JalaliDate::formatUtc((string) $review->comment_date_gmt, false);
+    } catch (\InvalidArgumentException) {
+        // A malformed legacy timestamp must not leak a Gregorian fallback.
+    }
+}
+
 ?>
 
 <article
@@ -46,12 +56,7 @@ $rating = (int) get_comment_meta(
 
         <span class="fa-review-date">
 
-            <?php echo esc_html(
-                get_comment_date(
-                    '',
-                    $review
-                )
-            ); ?>
+            <?php echo esc_html($reviewDate); ?>
 
         </span>
 
