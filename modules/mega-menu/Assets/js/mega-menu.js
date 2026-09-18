@@ -7,16 +7,22 @@
     var dropdown = root.querySelector('.fa-mega-dropdown');
     var closeButton = root.querySelector('.fa-mega-close');
     var tabs = root.querySelectorAll('.fa-mega-cat');
+    var interactionMode = function () {
+      var widgetMode = window.getComputedStyle(root).getPropertyValue('--fa-mega-interaction-mode').trim();
+      if (widgetMode === 'click' || widgetMode === 'hover') return widgetMode;
+      return root.dataset.interactionMode === 'click' ? 'click' : 'hover';
+    };
+    var supportsHover = function () { return interactionMode() === 'hover' && window.matchMedia('(hover: hover)').matches; };
     function open() { root.classList.add('is-open'); trigger.setAttribute('aria-expanded', 'true'); dropdown.setAttribute('aria-hidden', 'false'); }
     function close() { root.classList.remove('is-open'); trigger.setAttribute('aria-expanded', 'false'); dropdown.setAttribute('aria-hidden', 'true'); }
     function activate(tab) {
       tabs.forEach(function (item) { var panel = root.querySelector('#' + item.dataset.panel); var active = item === tab; item.classList.toggle('is-active', active); item.setAttribute('aria-selected', active ? 'true' : 'false'); if (panel) { panel.classList.toggle('is-active', active); panel.hidden = !active; } });
     }
     trigger.addEventListener('click', function () { root.classList.contains('is-open') ? close() : open(); });
-    root.addEventListener('mouseenter', function () { if (window.matchMedia('(hover: hover)').matches) open(); });
-    root.addEventListener('mouseleave', function () { if (window.matchMedia('(hover: hover)').matches) close(); });
+    root.addEventListener('mouseenter', function () { if (supportsHover()) open(); });
+    root.addEventListener('mouseleave', function () { if (supportsHover()) close(); });
     closeButton.addEventListener('click', function () { close(); trigger.focus(); });
-    tabs.forEach(function (tab) { tab.addEventListener('click', function () { activate(tab); }); tab.addEventListener('mouseenter', function () { if (window.matchMedia('(hover: hover)').matches) activate(tab); }); });
+    tabs.forEach(function (tab) { tab.addEventListener('click', function () { activate(tab); }); tab.addEventListener('mouseenter', function () { if (supportsHover()) activate(tab); }); });
     root.addEventListener('keydown', function (event) { if (event.key === 'Escape') { close(); trigger.focus(); } });
     document.addEventListener('click', function (event) { if (!root.contains(event.target)) close(); });
   }

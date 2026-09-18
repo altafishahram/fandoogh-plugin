@@ -30,7 +30,7 @@ final class Repository
 
         $terms = get_terms([
             'taxonomy' => 'product_cat', 'parent' => 0, 'hide_empty' => $hideEmpty,
-            'orderby' => 'name', 'order' => 'ASC',
+            'orderby' => 'menu_order', 'order' => 'ASC',
         ]);
         return is_wp_error($terms) ? [] : $terms;
     }
@@ -40,7 +40,7 @@ final class Repository
     {
         $terms = get_terms([
             'taxonomy' => 'product_cat', 'parent' => $termId, 'hide_empty' => true,
-            'orderby' => 'name', 'order' => 'ASC',
+            'orderby' => 'menu_order', 'order' => 'ASC',
         ]);
         return is_wp_error($terms) ? [] : $terms;
     }

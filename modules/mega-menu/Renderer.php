@@ -15,10 +15,13 @@ final class Renderer
         if ($categories === []) return '';
         $settings = Service::settings();
         $button = ($args['button_text'] ?? '') !== '' ? $args['button_text'] : $settings['button_text'];
+        $icon = $args['button_icon'] ?? $settings['button_icon'];
+        $icon = array_key_exists($icon, Service::buttonIcons()) ? $icon : $settings['button_icon'];
+        $interaction = in_array($args['interaction_mode'] ?? '', ['hover', 'click'], true) ? $args['interaction_mode'] : $settings['interaction_mode'];
         $instance = wp_unique_id('fa-mega-');
         $class = trim('fa-mega-wrapper ' . ($args['class'] ?? ''));
-        $html = '<div class="' . esc_attr($class) . '" data-fa-mega-menu style="' . Service::cssVariables($settings, (array) ($args['styles'] ?? [])) . '">';
-        $html .= '<button type="button" class="fa-mega-trigger" aria-expanded="false" aria-controls="' . esc_attr($instance . '-dropdown') . '"><span class="dashicons dashicons-screenoptions" aria-hidden="true"></span><span>' . esc_html((string) $button) . '</span><span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>';
+        $html = '<div class="' . esc_attr($class) . '" data-fa-mega-menu data-interaction-mode="' . esc_attr($interaction) . '" style="' . Service::cssVariables($settings, (array) ($args['styles'] ?? [])) . '">';
+        $html .= '<button type="button" class="fa-mega-trigger" aria-expanded="false" aria-controls="' . esc_attr($instance . '-dropdown') . '"><span class="dashicons ' . esc_attr($icon) . '" aria-hidden="true"></span><span>' . esc_html((string) $button) . '</span><span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>';
         $html .= '<div id="' . esc_attr($instance . '-dropdown') . '" class="fa-mega-dropdown" aria-hidden="true"><button type="button" class="fa-mega-close" aria-label="' . esc_attr__('بستن مگا منو', 'fandoogh') . '"><span class="dashicons dashicons-no-alt" aria-hidden="true"></span></button><div class="fa-mega-sidebar" role="tablist" aria-label="' . esc_attr__('دسته‌بندی محصولات', 'fandoogh') . '">';
         foreach ($categories as $index => $category) $html .= self::categoryTab($category, $index === 0, $instance);
         $html .= '</div><div class="fa-mega-content">';
