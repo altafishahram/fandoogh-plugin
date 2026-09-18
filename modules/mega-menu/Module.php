@@ -12,6 +12,7 @@ final class Module
     {
         (new Frontend())->boot();
         (new Shortcode())->boot();
+        (new MobileShortcode())->boot();
 
     }
 }
