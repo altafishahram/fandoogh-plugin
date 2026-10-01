@@ -36,6 +36,8 @@ final class AdminManager
         }
 
         wp_enqueue_style(Assets::ADMIN, FA_URL . Assets::ADMIN_CSS, [], FA_BUILD);
+        wp_enqueue_style('fa-support', FA_URL . 'assets/admin/css/support.css', [Assets::ADMIN], FA_BUILD);
+        wp_enqueue_script('fa-support', FA_URL . 'assets/admin/js/support.js', [], FA_BUILD, true);
         wp_enqueue_script(Assets::ADMIN_DASHBOARD, FA_URL . Assets::ADMIN_DASHBOARD_JS, ['jquery'], FA_BUILD, true);
         wp_localize_script(Assets::ADMIN_DASHBOARD, 'faAdmin', [
             'ajaxUrl' => admin_url('admin-ajax.php'),

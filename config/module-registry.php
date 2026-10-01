@@ -5,6 +5,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 return [
+    'partner_pricing' => ['title' => __('افزودن قیمت همکاری به محصول', 'fandoogh'), 'description' => __('قیمت اختصاصی محصولات برای همکاران تأییدشده، همراه با شورت‌کد و ویجت المنتور.', 'fandoogh'), 'icon' => 'dashicons-tickets-alt', 'version' => '1.0.0'],
     'description' => ['title' => __('توضیحات', 'fandoogh'), 'description' => __('مدیریت توضیحات دسته‌بندی محصولات.', 'fandoogh'), 'icon' => 'dashicons-edit-page', 'version' => '1.0.0'],
     'video' => ['title' => __('ویدیو', 'fandoogh'), 'description' => __('مدیریت ویدیو، پوستر و گالری دسته‌بندی محصولات.', 'fandoogh'), 'icon' => 'dashicons-video-alt3', 'version' => '1.0.0'],
     'faq' => ['title' => __('سوالات متداول', 'fandoogh'), 'description' => __('مدیریت سوالات و پاسخ‌های دسته‌بندی محصولات.', 'fandoogh'), 'icon' => 'dashicons-editor-help', 'version' => '1.0.0'],

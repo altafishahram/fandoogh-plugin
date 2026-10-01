@@ -11,9 +11,9 @@ final class Renderer
     public static function render(array $args = []): string
     {
         if (! taxonomy_exists('product_cat')) return '';
-        $categories = Repository::parentCategories();
-        if ($categories === []) return '';
         $settings = Service::settings();
+        $categories = Repository::parentCategories(true, self::categoryIds($settings, $args));
+        if ($categories === []) return '';
         $button = ($args['button_text'] ?? '') !== '' ? $args['button_text'] : $settings['button_text'];
         $icon = $args['button_icon'] ?? $settings['button_icon'];
         $icon = array_key_exists($icon, Service::buttonIcons()) ? $icon : $settings['button_icon'];
@@ -27,6 +27,17 @@ final class Renderer
         $html .= '</div><div class="fa-mega-content">';
         foreach ($categories as $index => $category) $html .= self::panel($category, $index === 0, $instance, $settings);
         return $html . '</div></div></div>';
+    }
+
+    /** @return array<int, int> */
+    private static function categoryIds(array $settings, array $args): array
+    {
+        if (is_array($args['category_ids'] ?? null) && $args['category_ids'] !== []) {
+            return array_values(array_filter(array_map('absint', $args['category_ids'])));
+        }
+        return ($settings['category_display_mode'] ?? 'all') === 'selected'
+            ? (array) ($settings['visible_category_ids'] ?? [])
+            : [];
     }
 
     private static function categoryTab(\WP_Term $term, bool $active, string $instance): string

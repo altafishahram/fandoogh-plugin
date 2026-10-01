@@ -22,16 +22,21 @@ final class Repository
     }
 
     /** @return array<int, \WP_Term> */
-    public static function parentCategories(bool $hideEmpty = true): array
+    public static function parentCategories(bool $hideEmpty = true, array $includedIds = []): array
     {
         if (! taxonomy_exists('product_cat')) {
             return [];
         }
 
-        $terms = get_terms([
+        $args = [
             'taxonomy' => 'product_cat', 'parent' => 0, 'hide_empty' => $hideEmpty,
             'orderby' => 'menu_order', 'order' => 'ASC',
-        ]);
+        ];
+        $includedIds = array_values(array_filter(array_map('absint', $includedIds)));
+        if ($includedIds !== []) {
+            $args['include'] = $includedIds;
+        }
+        $terms = get_terms($args);
         return is_wp_error($terms) ? [] : $terms;
     }
 

@@ -1,0 +1,11 @@
+/* Keep the category sidebar as tall as the active category panel. */
+.fa-mega-dropdown {
+    align-items: stretch;
+}
+
+.fa-mega-sidebar {
+    align-self: stretch;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}

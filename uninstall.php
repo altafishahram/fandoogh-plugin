@@ -67,6 +67,7 @@ $postMetaKeys = [
     'fa_customer', 'fa_project', 'fa_review_object_type', 'fa_review_object_id',
     'fa_meta_title', 'fa_meta_description',
     'fa_product_faq', 'fa_product_reason_question', 'fa_product_reason_answer',
+    '_fa_partner_price',
 ];
 $termMetaKeys = [
     'fa_description', 'fa_faq', 'fa_video', 'fa_video_poster', 'fa_video_gallery',
@@ -83,6 +84,7 @@ foreach ($termMetaKeys as $key) {
 foreach ($commentMetaKeys as $key) {
     delete_metadata('comment', 0, $key, '', true);
 }
+delete_metadata('user', 0, '_fa_is_partner', '', true);
 
 $options = [
     'fa_framework_version', 'fa_version', 'fa_build', 'fa_db_version',

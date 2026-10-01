@@ -36,5 +36,7 @@ return [
 
     'customers'   => false,
 
+    'partner_pricing' => false,
+
 
 ];

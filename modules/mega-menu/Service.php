@@ -15,6 +15,8 @@ final class Service
             'button_text' => __('دسته‌بندی محصولات', 'fandoogh'),
             'button_icon' => 'dashicons-screenoptions',
             'interaction_mode' => 'hover',
+            'category_display_mode' => 'all',
+            'visible_category_ids' => [],
             'styles' => [
                 'button_bg' => '#6200ea', 'button_color' => '#ffffff', 'button_hover' => '#7c4dff', 'button_active' => '#7c4dff',
                 'button_radius' => 8, 'button_padding' => 10, 'button_font_size' => 15, 'button_shadow' => '0 4px 12px rgba(0,0,0,.2)',
@@ -27,6 +29,11 @@ final class Service
                 'card_title_size' => 14, 'card_count_size' => 12, 'image_size' => 42,
                 'banner_height' => 110, 'banner_radius' => 10,
                 'banner_background' => 'linear-gradient(135deg,#7c4dff,#6200ea)',
+                'mobile_bg' => '#ffffff', 'mobile_text_color' => '#172033', 'mobile_border_color' => '#edf0f3',
+                'mobile_item_bg' => '#f5f7f9', 'mobile_item_hover_bg' => '#eef2ff', 'mobile_item_hover_color' => '#172033',
+                'mobile_item_active_bg' => '#e8ddff', 'mobile_item_active_color' => '#6200ea', 'mobile_icon_color' => '#64748b',
+                'mobile_image_size' => 42, 'mobile_image_radius' => 8, 'mobile_item_radius' => 9,
+                'mobile_item_padding' => 12, 'mobile_item_gap' => 10, 'mobile_font_size' => 14,
             ],
             'banners' => [],
         ];
@@ -42,8 +49,8 @@ final class Service
         $defaults = self::defaults();
         $styles = [];
         $rawStyles = is_array($input['styles'] ?? null) ? $input['styles'] : [];
-        $colorKeys = ['button_bg', 'button_color', 'button_hover', 'button_active', 'menu_bg', 'sidebar_bg', 'sidebar_color', 'sidebar_hover', 'sidebar_hover_bg', 'sidebar_active', 'sidebar_active_bg', 'card_border', 'card_hover_border', 'card_icon_bg'];
-        $intKeys = ['button_radius', 'button_padding', 'button_font_size', 'menu_width', 'sidebar_width', 'menu_radius', 'sidebar_font_size', 'sidebar_padding', 'grid_columns', 'card_radius', 'card_title_size', 'card_count_size', 'image_size', 'banner_height', 'banner_radius'];
+        $colorKeys = ['button_bg', 'button_color', 'button_hover', 'button_active', 'menu_bg', 'sidebar_bg', 'sidebar_color', 'sidebar_hover', 'sidebar_hover_bg', 'sidebar_active', 'sidebar_active_bg', 'card_border', 'card_hover_border', 'card_icon_bg', 'mobile_bg', 'mobile_text_color', 'mobile_border_color', 'mobile_item_bg', 'mobile_item_hover_bg', 'mobile_item_hover_color', 'mobile_item_active_bg', 'mobile_item_active_color', 'mobile_icon_color'];
+        $intKeys = ['button_radius', 'button_padding', 'button_font_size', 'menu_width', 'sidebar_width', 'menu_radius', 'sidebar_font_size', 'sidebar_padding', 'grid_columns', 'card_radius', 'card_title_size', 'card_count_size', 'image_size', 'banner_height', 'banner_radius', 'mobile_image_size', 'mobile_image_radius', 'mobile_item_radius', 'mobile_item_padding', 'mobile_item_gap', 'mobile_font_size'];
         foreach ($defaults['styles'] as $key => $default) {
             if (in_array($key, $colorKeys, true)) {
                 $styles[$key] = sanitize_hex_color((string) ($rawStyles[$key] ?? '')) ?: $default;
@@ -75,8 +82,16 @@ final class Service
         }
 
         $interaction = in_array($input['interaction_mode'] ?? '', ['hover', 'click'], true) ? $input['interaction_mode'] : $defaults['interaction_mode'];
+        $categoryMode = ($input['category_display_mode'] ?? '') === 'selected' ? 'selected' : 'all';
+        $categoryIds = [];
+        foreach ((array) ($input['visible_category_ids'] ?? []) as $termId) {
+            $term = get_term(absint($termId), 'product_cat');
+            if ($term instanceof \WP_Term && (int) $term->parent === 0) {
+                $categoryIds[] = $term->term_id;
+            }
+        }
 
-        return ['button_text' => sanitize_text_field((string) ($input['button_text'] ?? $defaults['button_text'])), 'button_icon' => $icon, 'interaction_mode' => $interaction, 'styles' => $styles, 'banners' => $banners];
+        return ['button_text' => sanitize_text_field((string) ($input['button_text'] ?? $defaults['button_text'])), 'button_icon' => $icon, 'interaction_mode' => $interaction, 'category_display_mode' => $categoryMode, 'visible_category_ids' => array_values(array_unique($categoryIds)), 'styles' => $styles, 'banners' => $banners];
     }
 
     /** @return array<string, string> */
@@ -103,8 +118,9 @@ final class Service
             'menu_width' => '--fa-mega-width', 'sidebar_width' => '--fa-mega-sidebar-width', 'menu_radius' => '--fa-mega-radius', 'menu_shadow' => '--fa-mega-shadow', 'menu_bg' => '--fa-mega-menu-bg',
             'sidebar_bg' => '--fa-mega-sidebar-bg', 'sidebar_color' => '--fa-mega-sidebar-color', 'sidebar_hover' => '--fa-mega-sidebar-hover', 'sidebar_hover_bg' => '--fa-mega-sidebar-hover-bg', 'sidebar_active' => '--fa-mega-sidebar-active', 'sidebar_active_bg' => '--fa-mega-sidebar-active-bg', 'sidebar_font_size' => '--fa-mega-sidebar-font-size', 'sidebar_padding' => '--fa-mega-sidebar-padding',
             'grid_columns' => '--fa-mega-grid-columns', 'card_border' => '--fa-mega-card-border', 'card_hover_border' => '--fa-mega-card-hover-border', 'card_radius' => '--fa-mega-card-radius', 'card_hover_shadow' => '--fa-mega-card-hover-shadow', 'card_icon_bg' => '--fa-mega-card-icon-bg', 'card_title_size' => '--fa-mega-card-title-size', 'card_count_size' => '--fa-mega-card-count-size', 'image_size' => '--fa-mega-image-size', 'banner_height' => '--fa-mega-banner-height', 'banner_radius' => '--fa-mega-banner-radius', 'banner_background' => '--fa-mega-banner-bg',
+            'mobile_bg' => '--fa-mobile-nav-bg', 'mobile_text_color' => '--fa-mobile-nav-color', 'mobile_border_color' => '--fa-mobile-nav-border', 'mobile_item_bg' => '--fa-mobile-nav-item-bg', 'mobile_item_hover_bg' => '--fa-mobile-nav-item-hover-bg', 'mobile_item_hover_color' => '--fa-mobile-nav-item-hover-color', 'mobile_item_active_bg' => '--fa-mobile-nav-item-active-bg', 'mobile_item_active_color' => '--fa-mobile-nav-item-active-color', 'mobile_icon_color' => '--fa-mobile-nav-icon-color', 'mobile_image_size' => '--fa-mobile-nav-image-size', 'mobile_image_radius' => '--fa-mobile-nav-image-radius', 'mobile_item_radius' => '--fa-mobile-nav-item-radius', 'mobile_item_padding' => '--fa-mobile-nav-item-padding', 'mobile_item_gap' => '--fa-mobile-nav-item-gap', 'mobile_font_size' => '--fa-mobile-nav-font-size',
         ];
-        $px = ['button_radius', 'button_padding', 'button_font_size', 'menu_width', 'sidebar_width', 'menu_radius', 'sidebar_font_size', 'sidebar_padding', 'card_radius', 'card_title_size', 'card_count_size', 'image_size', 'banner_height', 'banner_radius'];
+        $px = ['button_radius', 'button_padding', 'button_font_size', 'menu_width', 'sidebar_width', 'menu_radius', 'sidebar_font_size', 'sidebar_padding', 'card_radius', 'card_title_size', 'card_count_size', 'image_size', 'banner_height', 'banner_radius', 'mobile_image_size', 'mobile_image_radius', 'mobile_item_radius', 'mobile_item_padding', 'mobile_item_gap', 'mobile_font_size'];
         $css = [];
         foreach ($map as $key => $var) if (isset($style[$key])) $css[] = $var . ':' . esc_attr((string) $style[$key] . (in_array($key, $px, true) ? 'px' : ''));
         return implode(';', $css);
@@ -117,6 +133,8 @@ final class Service
         $defaults['button_text'] = is_string($saved['button_text'] ?? null) ? $saved['button_text'] : $defaults['button_text'];
         $defaults['button_icon'] = array_key_exists($saved['button_icon'] ?? '', self::buttonIcons()) ? $saved['button_icon'] : $defaults['button_icon'];
         $defaults['interaction_mode'] = in_array($saved['interaction_mode'] ?? '', ['hover', 'click'], true) ? $saved['interaction_mode'] : $defaults['interaction_mode'];
+        $defaults['category_display_mode'] = ($saved['category_display_mode'] ?? '') === 'selected' ? 'selected' : 'all';
+        $defaults['visible_category_ids'] = is_array($saved['visible_category_ids'] ?? null) ? array_map('absint', $saved['visible_category_ids']) : [];
         return $defaults;
     }
 

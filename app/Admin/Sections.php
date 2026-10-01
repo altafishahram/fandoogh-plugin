@@ -112,15 +112,16 @@ final class Sections
     private static function crm(): void
     {
         ?>
-        <header class="fa-admin-welcome"><div><h1 tabindex="-1">مدیریت CRM</h1><p>قابلیت‌های نمایش سوابق مشتریان و پروژه‌های انجام‌شده را فعال کنید.</p></div></header>
+        <header class="fa-admin-welcome"><div><h1 tabindex="-1">مدیریت CRM</h1><p>مشتریان، پروژه‌ها و قیمت‌گذاری ویژه همکاران را مدیریت کنید.</p></div></header>
         <section class="fa-crm-intro fa-panel" aria-labelledby="fa-crm-intro-title">
             <header><span class="dashicons dashicons-groups" aria-hidden="true"></span><h2 id="fa-crm-intro-title">بعد از فعال‌سازی چه امکاناتی اضافه می‌شود؟</h2></header>
             <div class="fa-crm-features">
                 <div><strong>مشتریان</strong><p>نوع محتوای مشتریان، دسته‌بندی اختصاصی، تصویر، توضیحات HTML، آدرس، دسته محصولات، ویدیو و گالری به همراه شورت‌کدها و Dynamic Tagهای المنتور اضافه می‌شود.</p></div>
+                <div><strong>قیمت همکاری محصولات</strong><p>برای محصول ساده یا هر تنوع، قیمت همکاری وارد کنید. در ویرایش کاربر، گزینه «همکار تأییدشده» را فعال کنید تا پس از ورود با قیمت اختصاصی خرید کند.</p><a href="<?php echo esc_url(admin_url('users.php')); ?>">انتخاب و مدیریت همکاران</a><p><code dir="ltr">[fa_partner_price product_id="123" show_cart="yes"]</code></p><p>در هر برگه قابل استفاده است؛ با حذف شناسه، محصول جاری نمایش داده می‌شود. کادر خالی قیمت = قیمت معمول. کوپن و مالیات طبق تنظیمات ووکامرس محاسبه می‌شوند.</p></div>
                 <div><strong>پروژه‌ها</strong><p>نوع محتوای مستقل پروژه‌ها، دسته‌بندی اختصاصی، پیمانکار، تصویر، توضیحات HTML، آدرس، دسته محصولات، ویدیو و گالری به همراه شورت‌کدها و Dynamic Tagهای المنتور اضافه می‌شود.</p></div>
             </div>
         </section>
-        <?php self::moduleCards(['customers', 'projects']); ?>
+        <?php self::moduleCards(['customers', 'projects', 'partner_pricing']); ?>
         <?php
     }
 
@@ -229,6 +230,30 @@ final class Sections
 
     private static function support(): void
     {
-        ?><header class="fa-admin-welcome"><div><h1 tabindex="-1">پشتیبانی</h1><p>راهنما و مسیرهای ارتباطی فندق</p></div></header><section class="fa-panel"><header><span class="dashicons dashicons-heart" aria-hidden="true"></span><h2>نیاز به راهنمایی دارید؟</h2></header><p>برای دریافت راهنمایی و گزارش مشکل با تیم پشتیبانی فندق در ارتباط باشید.</p><p><a class="button button-primary" href="https://fandoogh.ir" target="_blank" rel="noopener noreferrer">ورود به پشتیبانی</a></p></section><?php
+        ?>
+        <header class="fa-admin-welcome"><div><h1 tabindex="-1">پشتیبانی و حمایت مالی</h1><p>کنار شما برای ساخت یک فروشگاه بهتر</p></div></header>
+        <div class="fa-support-grid">
+            <section class="fa-panel fa-support-card">
+                <span class="fa-support-symbol dashicons dashicons-format-chat" aria-hidden="true"></span>
+                <h2>فندق، همراه فروشگاه شما</h2>
+                <p>فندق ابزارهای مدیریت محتوا، مگامنو و ارتباط با مشتریان را در یک افزونه برای وردپرس و ووکامرس گرد هم می‌آورد.</p>
+                <p>برای راهنمایی، گزارش خطا و پیگیری رفع ایراد، از طریق واتساپ پیام بدهید.</p>
+                <a class="fa-support-whatsapp" href="https://wa.me/989116765709" target="_blank" rel="noopener noreferrer">پشتیبانی در واتساپ <span class="dashicons dashicons-external" aria-hidden="true"></span></a>
+                <small dir="ltr">+98 911 676 5709</small>
+            </section>
+            <section class="fa-panel fa-support-card">
+                <h2>حمایت مالی از توسعه فندق</h2>
+                <p>حمایت داوطلبانه شما به ادامه توسعه، نگهداری و بهتر شدن افزونه کمک می‌کند.</p>
+                <div class="fa-donation-bank" aria-label="کارت بانکی حمایت مالی، به نام شهرام الطافی">
+                    <div class="fa-donation-bank__top"><span class="fa-donation-bank__brand" dir="ltr">blu</span><span>حمایت از فندق</span></div>
+                    <span class="fa-donation-bank__chip" aria-hidden="true"></span>
+                    <bdi class="fa-donation-bank__number" dir="ltr">6219 8619 3196 6922</bdi>
+                    <span class="fa-donation-bank__owner">شهرام الطافی</span>
+                </div>
+                <button class="button fa-donation-copy" type="button" data-fa-donation-copy="6219861931966922">کپی شماره کارت</button>
+                <span class="fa-donation-status" role="status" aria-live="polite"></span>
+            </section>
+        </div>
+        <?php
     }
 }
