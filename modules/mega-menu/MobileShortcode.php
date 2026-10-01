@@ -19,10 +19,11 @@ final class MobileShortcode
             return '';
         }
 
-        $atts = shortcode_atts(['class' => '', 'home_label' => __('خانه', 'fandoogh')], (array) $attributes, 'fa_mobile_category_menu');
+        $atts = shortcode_atts(['class' => '', 'home_label' => __('خانه', 'fandoogh'), 'category_ids' => ''], (array) $attributes, 'fa_mobile_category_menu');
         return MobileRenderer::render([
             'class' => sanitize_html_class((string) $atts['class']),
             'home_label' => sanitize_text_field((string) $atts['home_label']),
+            'category_ids' => array_filter(array_map('absint', explode(',', (string) $atts['category_ids']))),
         ]);
     }
 }

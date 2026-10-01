@@ -16,10 +16,11 @@ final class Shortcode
     public function render(array|string $attributes = []): string
     {
         if (is_admin() && ! wp_doing_ajax()) return '';
-        $atts = shortcode_atts(['button_text' => '', 'class' => ''], (array) $attributes, 'fa_mega_menu');
+        $atts = shortcode_atts(['button_text' => '', 'class' => '', 'category_ids' => ''], (array) $attributes, 'fa_mega_menu');
         return Renderer::render([
             'button_text' => sanitize_text_field((string) $atts['button_text']),
             'class' => sanitize_html_class((string) $atts['class']),
+            'category_ids' => array_filter(array_map('absint', explode(',', (string) $atts['category_ids']))),
         ]);
     }
 }

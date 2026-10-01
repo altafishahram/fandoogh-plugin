@@ -1,0 +1,6 @@
+.fa-partner-price{display:flex;flex-direction:column;align-items:flex-start;gap:8px;font:inherit}
+.fa-partner-price__label{font-size:.9em;color:inherit}
+.fa-partner-price__amount{font-size:1.2em;font-weight:700;color:inherit}
+.fa-partner-price .fa-partner-price__buy{display:inline-flex;padding:10px 18px;background:#1769e0;color:#fff;border-radius:8px;text-decoration:none;line-height:1.6}
+.fa-partner-price .fa-partner-price__buy:hover{background:#104ca4;color:#fff}
+.fa-partner-price__buy:focus-visible{outline:2px solid currentColor;outline-offset:3px}

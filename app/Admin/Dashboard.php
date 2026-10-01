@@ -34,7 +34,7 @@ final class Dashboard
             'crm' => ['مدیریت CRM', 'dashicons-groups', 'fa-crm'],
             'theme' => ['پوسته پنل', 'dashicons-art', 'fa-theme'],
             'settings' => ['تنظیمات', 'dashicons-admin-generic', 'fa-settings'],
-            'support' => ['پشتیبانی', 'dashicons-heart', 'fa-support'],
+            'support' => ['پشتیبانی و حمایت مالی', 'dashicons-heart', 'fa-support'],
         ];
         ?>
         <div class="wrap fa-admin-shell" dir="rtl">

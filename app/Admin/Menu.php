@@ -18,7 +18,7 @@ final class Menu
         add_submenu_page('fa', __('مدیریت CRM', 'fandoogh'), __('مدیریت CRM', 'fandoogh'), 'manage_options', 'fa-crm', [$this, 'crm']);
         add_submenu_page('fa', __('پوسته پنل', 'fandoogh'), __('پوسته پنل', 'fandoogh'), 'manage_options', 'fa-theme', [$this, 'theme']);
         add_submenu_page('fa', __('تنظیمات', 'fandoogh'), __('تنظیمات', 'fandoogh'), 'manage_options', 'fa-settings', [$this, 'settings']);
-        add_submenu_page('fa', __('پشتیبانی', 'fandoogh'), __('پشتیبانی', 'fandoogh'), 'manage_options', 'fa-support', [$this, 'support']);
+        add_submenu_page('fa', __('پشتیبانی و حمایت مالی', 'fandoogh'), __('پشتیبانی و حمایت مالی', 'fandoogh'), 'manage_options', 'fa-support', [$this, 'support']);
     }
 
     public function dashboard(): void { Dashboard::render(); }

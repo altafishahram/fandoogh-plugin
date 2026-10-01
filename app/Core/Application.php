@@ -38,6 +38,7 @@ final class Application
         'reviews' => ReviewsModule::class,
         'customers' => CustomersApplication::class,
         'projects' => ProjectsApplication::class,
+        'partner_pricing' => \Fandoogh\CRM\PartnerPricing\Module::class,
     ];
 
 

@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.4.2",
   "scripts": {
-    "test:php": "php tests/autoloader.php && php tests/reviews-rate-limiter.php",
+    "test:php": "php tests/autoloader.php && php tests/reviews-rate-limiter.php && php tests/partner-pricing.php",
     "test:js": "vitest run",
     "test": "npm run test:php && npm run test:js"
   },

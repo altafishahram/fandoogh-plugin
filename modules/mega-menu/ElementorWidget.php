@@ -22,6 +22,7 @@ final class ElementorWidget extends Widget
         $this->add_control('button_text', ['label' => __('متن دکمه', 'fandoogh'), 'type' => Controls_Manager::TEXT, 'default' => __('دسته‌بندی محصولات', 'fandoogh')]);
         $this->add_control('button_icon', ['label' => __('آیکون دکمه', 'fandoogh'), 'type' => Controls_Manager::SELECT, 'options' => ['' => __('پیش‌فرض ماژول', 'fandoogh')] + Service::buttonIcons()]);
         $this->add_control('interaction_mode', ['label' => __('نحوه بازشدن منو', 'fandoogh'), 'type' => Controls_Manager::SELECT, 'options' => ['' => __('پیش‌فرض ماژول', 'fandoogh'), 'hover' => __('هاور', 'fandoogh'), 'click' => __('کلیک', 'fandoogh')], 'selectors' => ['{{WRAPPER}} .fa-mega-wrapper' => '--fa-mega-interaction-mode: {{VALUE}} !important;']]);
+        $this->add_control('category_ids', ['label' => __('دسته‌های اصلی نمایشی', 'fandoogh'), 'type' => Controls_Manager::SELECT2, 'multiple' => true, 'options' => self::categoryOptions(), 'description' => __('خالی بگذارید تا انتخاب پنل افزونه استفاده شود.', 'fandoogh')]);
         $this->end_controls_section();
 
         $this->start_controls_section('style', ['label' => __('استایل', 'fandoogh'), 'tab' => Controls_Manager::TAB_STYLE]);
@@ -57,8 +58,19 @@ final class ElementorWidget extends Widget
             'button_text' => sanitize_text_field((string) ($settings['button_text'] ?? '')),
             'button_icon' => sanitize_key((string) ($settings['button_icon'] ?? '')),
             'interaction_mode' => sanitize_key((string) ($settings['interaction_mode'] ?? '')),
+            'category_ids' => array_values(array_filter(array_map('absint', (array) ($settings['category_ids'] ?? [])))),
         ]);
         // Renderer escapes its dynamic values itself; retain scoped CSS custom properties.
         echo $html;
+    }
+
+    /** @return array<int, string> */
+    private static function categoryOptions(): array
+    {
+        $options = [];
+        foreach (Repository::parentCategories(false) as $category) {
+            $options[$category->term_id] = $category->name;
+        }
+        return $options;
     }
 }

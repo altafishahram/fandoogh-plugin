@@ -47,6 +47,10 @@ final class Widgets
         Widgets_Manager $manager
     ): void {
 
+        if ($this->modules->enabled('partner_pricing') && function_exists('wc_get_product')) {
+            $manager->register(new \Fandoogh\CRM\PartnerPricing\Widget());
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Description
@@ -85,6 +89,9 @@ final class Widgets
         if ($this->modules->enabled('mega_menu')) {
             $manager->register(
                 new \Fandoogh\Modules\MegaMenu\ElementorWidget()
+            );
+            $manager->register(
+                new \Fandoogh\Modules\MegaMenu\MobileElementorWidget()
             );
         }
 

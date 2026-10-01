@@ -1,0 +1,18 @@
+.fa-admin-shell .fa-support-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch}
+.fa-admin-shell .fa-support-card{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:28px;min-width:0}
+.fa-admin-shell .fa-support-card h2{margin:0;font-size:21px;line-height:1.7}
+.fa-admin-shell .fa-support-card p{margin:0;line-height:2;max-width:58ch}
+.fa-admin-shell .fa-support-card small{opacity:.8;font-size:13px}
+.fa-admin-shell .fa-support-symbol{display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:#e4f5ed;color:#15764b;font-size:30px}
+.fa-admin-shell .fa-support-whatsapp{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px;border-radius:12px;background:#177b4b;color:#fff;text-decoration:none;font-weight:700;margin-top:auto;line-height:1.8}
+.fa-admin-shell .fa-support-whatsapp:hover{background:#116139;color:#fff}
+.fa-admin-shell .fa-support-whatsapp:focus-visible{outline:3px solid #177b4b;outline-offset:4px}
+.fa-admin-shell .fa-donation-bank{box-sizing:border-box;position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;gap:15px;width:100%;max-width:380px;min-height:210px;padding:23px;border-radius:19px;background:linear-gradient(125deg,#0c79f4,#1263dd 65%,#1955c8);color:#fff;box-shadow:0 12px 28px #1263dd35;margin:8px 0 6px}
+.fa-admin-shell .fa-donation-bank:after{content:"";position:absolute;z-index:-1;width:240px;height:240px;border:1px solid #ffffff26;border-radius:50%;left:-90px;bottom:-135px;box-shadow:0 0 0 25px #ffffff08,0 0 0 50px #ffffff06}
+.fa-admin-shell .fa-donation-bank__top{display:flex;align-items:center;justify-content:space-between;flex-direction:row-reverse;font-size:12px}
+.fa-admin-shell .fa-donation-bank__brand{font-family:Arial,sans-serif;font-weight:700;font-size:38px;line-height:1;letter-spacing:-2px;color:#fff}
+.fa-admin-shell .fa-donation-bank__chip{width:35px;height:27px;border-radius:6px;border:1px solid #ffeab8;background:linear-gradient(90deg,transparent 32%,#ab9360 33%,transparent 35%,transparent 65%,#ab9360 66%,transparent 68%),linear-gradient(0deg,#dabd82 47%,#a79065 49%,#efd69c 52%)}
+.fa-admin-shell .fa-donation-bank__number{font-family:Consolas,monospace;font-size:clamp(16px,2vw,24px);font-weight:600;letter-spacing:1px;text-align:center;white-space:nowrap;color:#fff}
+.fa-admin-shell .fa-donation-bank__owner{font-size:15px;color:#fff}
+.fa-admin-shell .fa-donation-status{font-size:13px;min-height:1.5em}
+@media(max-width:1050px){.fa-admin-shell .fa-support-grid{grid-template-columns:1fr}.fa-admin-shell .fa-support-card{padding:20px}.fa-admin-shell .fa-donation-bank__number{font-size:clamp(16px,4vw,24px)}}
