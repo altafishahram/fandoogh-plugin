@@ -68,6 +68,7 @@ $postMetaKeys = [
     'fa_meta_title', 'fa_meta_description',
     'fa_product_faq', 'fa_product_reason_question', 'fa_product_reason_answer',
     '_fa_partner_price',
+    '_fa_project_customer', '_fa_project_product',
 ];
 $termMetaKeys = [
     'fa_description', 'fa_faq', 'fa_video', 'fa_video_poster', 'fa_video_gallery',

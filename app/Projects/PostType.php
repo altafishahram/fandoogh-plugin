@@ -67,6 +67,8 @@ final class PostType
                         'video' => ['type' => 'string', 'format' => 'uri'],
                         'gallery' => ['type' => 'array', 'items' => ['type' => 'integer']],
                         'categories' => ['type' => 'array', 'items' => ['type' => 'integer']],
+                        'customer_id' => ['type' => 'integer'],
+                        'product_ids' => ['type' => 'array', 'items' => ['type' => 'integer']],
                     ],
                     'additionalProperties' => false,
                 ],

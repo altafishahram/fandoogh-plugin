@@ -77,6 +77,7 @@ final class MetaBoxes
         <table class="form-table">
 
             <tbody>
+                <?php Relations::fields($post->ID); ?>
 
                 <tr>
 
@@ -449,6 +450,8 @@ border:1px solid #ddd;
                 'gallery' => $gallery,
 
                 'categories' => $categories,
+                'customer_id' => absint($_POST['fa_project_customer'] ?? 0),
+                'product_ids' => array_map('absint', (array) wp_unslash($_POST['fa_project_products'] ?? [])),
 
             ]
 

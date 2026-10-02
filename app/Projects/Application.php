@@ -19,5 +19,6 @@ final class Application
         (new MetaBoxes())->boot();
 
         (new Shortcodes())->boot();
+        (new Relations())->boot();
     }
 }

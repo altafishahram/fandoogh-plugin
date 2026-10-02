@@ -65,6 +65,7 @@ final class Sections
         <section class="fa-admin-stats" aria-label="آمار افزونه"><?php foreach ($stats as [$label, $value, $icon]) : ?><article class="fa-admin-stat"><span class="dashicons <?php echo esc_attr($icon); ?>" aria-hidden="true"></span><div><strong><?php echo esc_html((string) $value); ?></strong><small><?php echo esc_html($label); ?></small></div></article><?php endforeach; ?></section>
         <section class="fa-admin-grid"><article class="fa-panel"><header><span class="dashicons dashicons-shield" aria-hidden="true"></span><h2>سلامت سیستم</h2></header><div class="fa-health-list"><?php foreach ($health as [$label, $value, $ok]) : ?><div><span><?php echo esc_html($label); ?></span><b class="<?php echo $ok ? 'is-ok' : 'is-warning'; ?>"><?php echo esc_html((string) $value); ?></b></div><?php endforeach; ?></div></article><article class="fa-panel"><header><span class="dashicons dashicons-admin-links" aria-hidden="true"></span><h2>دسترسی سریع</h2></header><div class="fa-quick-links"><a href="<?php echo esc_url(admin_url('post-new.php?post_type=fa_customer')); ?>">افزودن مشتری</a><a href="<?php echo esc_url(admin_url('post-new.php?post_type=fa_project')); ?>">افزودن پروژه</a><a href="<?php echo esc_url(admin_url('edit-comments.php')); ?>">مدیریت نظرات</a><a href="<?php echo esc_url(admin_url('edit-tags.php?taxonomy=product_cat&post_type=product')); ?>">دسته‌های محصول</a></div></article></section>
         <?php
+        ActionReports::render();
     }
 
     private static function modules(): void

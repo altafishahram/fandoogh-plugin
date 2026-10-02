@@ -11,6 +11,8 @@ require_once FA_APP . 'Core/Autoloader.php';
 \Fandoogh\Core\Autoloader::register();
 
 $classes = [
+    \Fandoogh\Projects\Relations::class,
+    \Fandoogh\Admin\ActionReports::class,
     \Fandoogh\Core\JalaliDate::class,
     \Fandoogh\Modules\Reviews\RateLimiter::class,
     \Fandoogh\Modules\MegaMenu\Module::class,
